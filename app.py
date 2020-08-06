@@ -33,7 +33,15 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
+    msg_from_user = event.message.text
+    msg_to_user = ""
+    if(msg_from_user == "我要發問"):
+        msg_to_user = "請輸入您的問題"
+    else:
+        msg_to_user = msg_from_user
+
+    
+    message = TextSendMessage(text=msg_to_user)
     line_bot_api.reply_message(event.reply_token, message)
 
 
