@@ -34,6 +34,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg_from_user = event.message.text
+    message = ""
     if(msg_from_user == "鎮霆好帥"):
         message = "你說得對"
     else:
