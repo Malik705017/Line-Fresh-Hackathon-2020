@@ -39,9 +39,9 @@ def handle_message(event):
         msg_to_user = "請輸入您的問題"
     elif(msg_from_user == "我的資訊"):
         profile = line_bot_api.get_profile(user_id)
-        name = (profile.display_name)
-        id = (profile.user_id)
-        status_msg = (profile.status_message)
+        name = str(profile.display_name)
+        id = str(profile.user_id)
+        status_msg = str(profile.status_message)
         msg_to_user = name + "\n" + id + "\n"+ status_msg
     else:
         msg_to_user = msg_from_user
