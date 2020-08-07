@@ -39,8 +39,10 @@ def handle_message(event):
         msg_to_user = "請輸入您的問題"
     elif(msg_from_user == "我要貼圖"):
         message = StickerSendMessage(
-        package_id='1',
-        sticker_id='1'
+        randNum1 = random.randint(1, 100)
+        randNum2 = random.randint(1, 100)
+        package_id=str(randNum1),
+        sticker_id=str(randNum2)
         )
         line_bot_api.reply_message(event.reply_token, message)
     else:
