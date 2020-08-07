@@ -36,8 +36,10 @@ def callback():
 def handle_message(event):
     msg_from_user = event.message.text
     msg_to_user = ""
+    message = ""
     if(msg_from_user == "我要發問"):
         msg_to_user = "請輸入您的問題"
+        message = TextSendMessage(text=msg_to_user)
     elif(msg_from_user == "我要貼圖"):
         randNum1 = random.randint(11537, 11539)
         randNum2 = 0
@@ -51,13 +53,7 @@ def handle_message(event):
         package_id=str(randNum1),
         sticker_id=str(randNum2)
         )
-        line_bot_api.reply_message(event.reply_token, message)
-    else:
-        msg_to_user = msg_from_user
-
-    if(msg_from_user != "我要貼圖"):
-        message = TextSendMessage(text=msg_to_user)
-        line_bot_api.reply_message(event.reply_token, message)
+    line_bot_api.reply_message(event.reply_token, message)
     
 
 
