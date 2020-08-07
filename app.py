@@ -38,14 +38,16 @@ def handle_message(event):
     if(msg_from_user == "我要發問"):
         msg_to_user = "請輸入您的問題"
     elif(msg_from_user == "我要貼圖"):
-        msg_to_user = StickerSendMessage(
+        message = StickerSendMessage(
         package_id='1',
         sticker_id='1'
         )
+        line_bot_api.reply_message(event.reply_token, message)
     else:
         msg_to_user = msg_from_user
-    message = TextSendMessage(text=msg_to_user)
-    line_bot_api.reply_message(event.reply_token, message)
+    if(msg_from_user != "我要貼圖"):
+        message = TextSendMessage(text=msg_to_user)
+        line_bot_api.reply_message(event.reply_token, message)
 
 
 import os
