@@ -38,8 +38,14 @@ def handle_message(event):
     if(msg_from_user == "我要發問"):
         msg_to_user = "請輸入您的問題"
     elif(msg_from_user == "我要貼圖"):
-        randNum1 = random.randint(1, 2)
-        randNum2 = random.randint(1, 10)
+        randNum1 = random.randint(11537, 11539)
+        randNum2 = 0
+        if(randNum1 == 11537):
+            randNum2 = random.randint(52002734, 52002773)
+        elif(randNum1 == 11538):
+            randNum2 = random.randint(51626494, 51626533)
+        else:
+            randNum2 = random.randint(52114110, 52114149)
         message = StickerSendMessage(
         package_id=str(randNum1),
         sticker_id=str(randNum2)
