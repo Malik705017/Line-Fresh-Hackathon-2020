@@ -7,6 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
+import random
 
 app = Flask(__name__)
 
