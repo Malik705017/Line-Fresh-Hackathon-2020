@@ -24,6 +24,10 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
+
+    # 自己加的
+    print(body)
+    
     # handle webhook body
     try:
         handler.handle(body, signature)
@@ -53,6 +57,12 @@ def handle_message(event):
         package_id=str(randNum1),
         sticker_id=str(randNum2)
         )
+    elif(msg_from_user == "我要圖片"):
+        message = ImageSendMessage(
+        original_content_url='https://example.com/original.jpg',
+        preview_image_url='https://example.com/preview.jpg'
+        )   
+
     line_bot_api.reply_message(event.reply_token, message)
     
 
