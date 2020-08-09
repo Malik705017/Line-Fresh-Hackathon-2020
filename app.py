@@ -73,7 +73,7 @@ def handle_message(event):
         randNum = random.randint(0,100)
         msg_to_user = msg_from_user.replace("問 ","")+"的機率是"+str(randNum)+"%"
         message = TextSendMessage(text=msg_to_user)
-    elif(msg_from_user.find("抽卡")!= -1):
+    elif(msg_from_user.find("抽")== 0 and msg_from_user.find("卡")== 1 ):
         url = imgdic.returnCard()
         message = ImageSendMessage(
         original_content_url=url,
