@@ -75,9 +75,10 @@ def handle_message(event):
         message = TextSendMessage(text=msg_to_user)
     elif(msg_from_user.find("抽！")!= -1):
         randNum = random.randint(1,30)
+        url = 'https://git.heroku.com/line-ask.git/DL_Card/'+str(randNum)+".jpg"
         message = ImageSendMessage(
-        original_content_url='./DL_Card/'+str(randNum)+".jpg",
-        preview_image_url='./DL_Card/'+str(randNum)+".jpg"
+        original_content_url=url,
+        preview_image_url=url
         )
     else:
         pass
