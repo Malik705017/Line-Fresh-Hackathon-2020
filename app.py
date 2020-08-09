@@ -73,7 +73,8 @@ def handle_message(event):
         randNum = random.randint(0,100)
         msg_to_user = msg_from_user.replace("問 ","")+"的機率是"+str(randNum)+"%"
         message = TextSendMessage(text=msg_to_user)
-
+    else:
+        pass
 
     line_bot_api.reply_message(event.reply_token, message)
     
