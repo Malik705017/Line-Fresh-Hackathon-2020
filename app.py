@@ -76,8 +76,8 @@ def handle_message(event):
     elif(msg_from_user.find("抽！")!= -1):
         randNum = random.randint(1,30)
         message = ImageSendMessage(
-        original_content_url='./DL_Card'+str(randNum)+".jpg",
-        preview_image_url='./DL_Card'+str(randNum)+".jpg"
+        original_content_url='./DL_Card/'+str(randNum)+".jpg",
+        preview_image_url='./DL_Card/'+str(randNum)+".jpg"
         )
     else:
         pass
