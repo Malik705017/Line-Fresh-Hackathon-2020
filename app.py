@@ -27,7 +27,7 @@ def callback():
 
     # 自己加的
     print(body)
-    
+
     # handle webhook body
     try:
         handler.handle(body, signature)
@@ -42,7 +42,7 @@ def handle_message(event):
     msg_to_user = ""
     message = ""
     if(msg_from_user == "我要發問"):
-        msg_to_user = "請輸入您的問題"
+        msg_to_user = "請到以下網址發問：https://lineask-1c65c.web.app/#/"
         message = TextSendMessage(text=msg_to_user)
     elif(msg_from_user == "我要貼圖"):
         randNum1 = random.randint(11537, 11539)
