@@ -17,6 +17,7 @@ line_bot_api = LineBotApi('2DmvpJgdmXcSHowzVSWZVfiF3aqsHskszknRMN7yicHtjlpV64tAE
 handler = WebhookHandler('7ee8f5c2aa2dc3a9a0dc6e52ed7241a6')
 
 # 監聽所有來自 /callback 的 Post Request
+# 我們利用 Python 套件 flask 的幫助，告訴 Heorku，只要有人(以這個例子來說，是 LINE 送來資訊)呼叫 "https://你-APP-的名字.herokuapp.com/callback" ，就執行下列程式碼
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -61,7 +62,10 @@ def handle_message(event):
         message = ImageSendMessage(
         original_content_url='https://example.com/original.jpg',
         preview_image_url='https://example.com/preview.jpg'
-        )   
+        )
+    elif(msg_from_user == "我的個資"):
+        message = TextSendMessage(text=str(event)) #回傳Line的event物件
+  
 
     line_bot_api.reply_message(event.reply_token, message)
     
