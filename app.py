@@ -64,8 +64,12 @@ def handle_message(event):
         preview_image_url='https://example.com/preview.jpg'
         )
     elif(msg_from_user == "我的個資"):
-        message = TextSendMessage(text=str(event)) #回傳Line的event物件
-  
+        #從Line的event物件抓資料
+        userID = event.source.user_id
+        message_type = event.type
+        msg_to_user = "您的ID: "+userID+"\n訊息種類: "+message_type+"\n您傳的訊息是: "+msg_from_user
+        message = TextSendMessage(text=msg_to_user)
+    
 
     line_bot_api.reply_message(event.reply_token, message)
     
