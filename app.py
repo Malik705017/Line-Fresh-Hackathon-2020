@@ -66,10 +66,14 @@ def handle_message(event):
     elif(msg_from_user == "我的個資"):
         #從Line的event物件抓資料
         userID = event.source.user_id
-        message_type = event.type
+        message_type = event.message.type
         msg_to_user = "您的ID: "+userID+"\n訊息種類: "+message_type+"\n您傳的訊息是: "+msg_from_user
         message = TextSendMessage(text=msg_to_user)
-    
+    elif(msg_from_user.find("問")!=1):
+        randNum = random.randint(0,100)
+        msg_to_user = msg_from_user.replace("問 ","")+"的機率是"+str(randNum)+"%"
+        message = TextSendMessage(text=msg_to_user)
+
 
     line_bot_api.reply_message(event.reply_token, message)
     
