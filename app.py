@@ -8,7 +8,7 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 import random
-
+import imgdic
 app = Flask(__name__)
 
 # Channel Access Token
@@ -74,8 +74,7 @@ def handle_message(event):
         msg_to_user = msg_from_user.replace("問 ","")+"的機率是"+str(randNum)+"%"
         message = TextSendMessage(text=msg_to_user)
     elif(msg_from_user.find("抽！")!= -1):
-        randNum = random.randint(1,30)
-        url = 'https://line-ask.herokuapp.com/DL_Card/'+str(randNum)+".jpg"
+        url = returnCard()
         message = ImageSendMessage(
         original_content_url=url,
         preview_image_url=url
