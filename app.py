@@ -9,6 +9,7 @@ from linebot.exceptions import (
 from linebot.models import *
 import random
 import imgdic
+import psycopg2
 app = Flask(__name__)
 
 # Channel Access Token
@@ -45,15 +46,18 @@ def handle_message(event):
     if(msg_from_user == "我要發問"):
         msg_to_user = "請到以下網址發問：https://lineask-1c65c.web.app/#/"
         message = TextSendMessage(text=msg_to_user)
-    elif(msg_from_user == "我要貼圖"):
-        randNum1 = random.randint(11537, 11539)
+    elif(msg_from_user == "貼圖"):
+        randNum1 = random.randint(11537, 11540)
         randNum2 = 0
         if(randNum1 == 11537):
             randNum2 = random.randint(52002734, 52002773)
         elif(randNum1 == 11538):
             randNum2 = random.randint(51626494, 51626533)
-        else:
+        elif(randNum1 == 11539):
             randNum2 = random.randint(52114110, 52114149)
+        elif(randNum1 == 11540):
+            randNum1 = 17421
+            randNum2 = random.randint(307314454, 307314461)
         message = StickerSendMessage(
         package_id=str(randNum1),
         sticker_id=str(randNum2)
