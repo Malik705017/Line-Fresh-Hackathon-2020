@@ -9,7 +9,7 @@ from linebot.exceptions import (
 from linebot.models import *
 import random
 import imgdic
-import psycopg2
+
 app = Flask(__name__)
 
 # Channel Access Token
