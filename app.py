@@ -47,7 +47,7 @@ def handle_message(event):
         msg_to_user = "請到以下網址發問：https://lineask-1c65c.web.app/#/"
         message = TextSendMessage(text=msg_to_user)
     elif(msg_from_user == "貼圖"):
-        randNum1 = random.randint(11537, 11540)
+        randNum1 = random.randint(11537, 11549)
         randNum2 = 0
         if(randNum1 == 11537):
             randNum2 = random.randint(52002734, 52002773)
@@ -55,17 +55,9 @@ def handle_message(event):
             randNum2 = random.randint(51626494, 51626533)
         elif(randNum1 == 11539):
             randNum2 = random.randint(52114110, 52114149)
-        elif(randNum1 == 11540):
-            randNum1 = 17421
-            randNum2 = random.randint(307314454, 307314461)
         message = StickerSendMessage(
         package_id=str(randNum1),
         sticker_id=str(randNum2)
-        )
-    elif(msg_from_user == "我要圖片"):
-        message = ImageSendMessage(
-        original_content_url='https://example.com/original.jpg',
-        preview_image_url='https://example.com/preview.jpg'
         )
     elif(msg_from_user == "我的個資"):
         #從Line的event物件抓資料
