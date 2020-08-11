@@ -14,13 +14,17 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
+print("Test")
 # 引用私密金鑰
 # path/to/serviceAccount.json 請用自己存放的路徑
 cred = credentials.Certificate("line--countdown-firebase-adminsdk-e43zw-fd20d58e12.json")
+print("error1")
 # 初始化firebase，注意不能重複初始化
 firebase_admin.initialize_app(cred)
+print("error2")
 # 初始化firestore
 db = firestore.client()
+print("error3")
 
 
 app = Flask(__name__)
