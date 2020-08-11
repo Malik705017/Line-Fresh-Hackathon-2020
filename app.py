@@ -17,6 +17,38 @@ line_bot_api = LineBotApi('2DmvpJgdmXcSHowzVSWZVfiF3aqsHskszknRMN7yicHtjlpV64tAE
 # Channel Secret
 handler = WebhookHandler('7ee8f5c2aa2dc3a9a0dc6e52ed7241a6')
 
+
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+# 引用私密金鑰
+# path/to/serviceAccount.json 請用自己存放的路徑
+cred = credentials.Certificate('./serviceAccount.json')
+
+# 初始化firebase，注意不能重複初始化
+firebase_admin.initialize_app(cred)
+
+# 初始化firestore
+db = firestore.client()
+
+doc = {
+  'name': "張宇承",
+  'email': "fhh1482@gmail.com"
+}
+
+# 建立文件 必須給定 集合名稱 文件id
+# 即使 集合一開始不存在 都可以直接使用
+
+# 語法
+# doc_ref = db.collection("集合名稱").document("文件id")
+
+doc_ref = db.collection("NTU_students").document("student_01")
+
+# doc_ref提供一個set的方法，input必須是dictionary
+
+doc_ref.set(doc)
+
 # 監聽所有來自 /callback 的 Post Request
 # 我們利用 Python 套件 flask 的幫助，告訴 Heorku，只要有人(以這個例子來說，是 LINE 送來資訊)呼叫 "https://你-APP-的名字.herokuapp.com/callback" ，就執行下列程式碼
 @app.route("/callback", methods=['POST'])
