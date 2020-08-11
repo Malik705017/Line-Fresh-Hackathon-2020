@@ -37,3 +37,5 @@ def returnCard():
 
     url = imgDic[randNum]
     return(url)
+
+datacount = 0
