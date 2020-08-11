@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 
+# ---------------------------------創建Line Bot start---------------------------------- #
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -7,25 +8,6 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-import random
-import imgdic
-
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
-
-print("Test")
-# 引用私密金鑰
-# path/to/serviceAccount.json 請用自己存放的路徑
-cred = credentials.Certificate("line--countdown-firebase-adminsdk-e43zw-fd20d58e12.json")
-print("error1")
-# 初始化firebase，注意不能重複初始化
-firebase_admin.initialize_app(cred)
-print("error2")
-# 初始化firestore
-db = firestore.client()
-print("error3")
-
 
 app = Flask(__name__)
 
@@ -33,7 +15,30 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('2DmvpJgdmXcSHowzVSWZVfiF3aqsHskszknRMN7yicHtjlpV64tAEglzv9zzaZDA3NUlyciHlR/hmB/paASDE4rOBRb4tUI8a02iphYx5INjcPHrVmnUQc5x/td5TfPVuxSxWyorQPz4Elx1vp0IyAdB04t89/1O/w1cDnyilFU=')
 # Channel Secret
 handler = WebhookHandler('7ee8f5c2aa2dc3a9a0dc6e52ed7241a6')
+# ---------------------------------創建Line Bot end----------------------------------- #
 
+
+# ------------------------------連接Firebase資料庫 start------------------------------- #
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+# 引用私密金鑰
+cred = credentials.Certificate("line--countdown-firebase-adminsdk-e43zw-fd20d58e12.json")
+
+# 初始化firebase，注意不能重複初始化
+firebase_admin.initialize_app(cred)
+
+# 初始化firestore
+db = firestore.client()
+
+# -------------------------------連接Firebase資料庫 end-------------------------------- #
+
+
+# --------------------------------引用其他套件 start------------------------------------ #
+import random
+import imgdic
+# ---------------------------------引用其他套件 end------------------------------------- #
 
 
 # 監聽所有來自 /callback 的 Post Request
