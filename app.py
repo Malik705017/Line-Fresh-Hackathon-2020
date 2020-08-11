@@ -86,8 +86,7 @@ def handle_message(event):
         message = TextSendMessage(text=msg_to_user)
 
         doc = {
-        'name':str(userID)
-        'message':str(msg_from_user)
+        'name':userID , 'message':msg_from_user
         }
         # 建立文件 必須給定 集合名稱 文件id
         # 即使 集合一開始不存在 都可以直接使用
