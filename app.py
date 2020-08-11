@@ -40,6 +40,7 @@ import random
 import imgdic
 # ---------------------------------引用其他套件 end------------------------------------- #
 
+datacount = 0
 
 # 監聽所有來自 /callback 的 Post Request
 # 我們利用 Python 套件 flask 的幫助，告訴 Heorku，只要有人(以這個例子來說，是 LINE 送來資訊)呼叫 "https://你-APP-的名字.herokuapp.com/callback" ，就執行下列程式碼
@@ -83,28 +84,34 @@ def handle_message(event):
         package_id=str(randNum1),
         sticker_id=str(randNum2)
         )
-    elif(msg_from_user == "我的個資"):
+    elif(msg_from_user.find("輸入資料：")!= -1):
         #從Line的event物件抓資料
         userID = event.source.user_id
         message_type = event.message.type
-        msg_to_user = "您的ID: "+userID+"\n訊息種類: "+message_type+"\n您傳的訊息是: "+msg_from_user
+        
+        msg_to_user = "您的ID為: "+userID+"\n已將您的資料輸入至資料庫"
         message = TextSendMessage(text=msg_to_user)
 
+        data_message = msg_from_user.replace("輸入資料：","")
+        data_time = event.timestamp
+
         doc = {
-        'name':userID , 'message':msg_from_user
+        'message':data_message,
+        'timestamp': data_time
         }
+
         # 建立文件 必須給定 集合名稱 文件id
         # 即使 集合一開始不存在 都可以直接使用
-
         # 語法
         # doc_ref = db.collection("集合名稱").document("文件id")
-
-        doc_ref = db.collection("NTU_students").document("student_01")
+        doc_ref = db.collection("user").document(userID)
 
         # doc_ref提供一個set的方法，input必須是dictionary
-
         doc_ref.set(doc)
-
+        
+        datacount += 1
+        print(datacount)
+        
     elif(msg_from_user.find("問")== 0 and msg_from_user.find(" ")== 1):
         randNum = random.randint(0,100)
         msg_to_user = msg_from_user.replace("問 ","")+"的機率是"+str(randNum)+"%"
