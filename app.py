@@ -126,7 +126,7 @@ def handle_message(event):
 
         for doc in docs:
             print(f'{doc.id} => {doc.to_dict()}')
-            msg_to_user + doc.to_dict()['message'] + "\n"
+            msg_to_user += doc.to_dict()['message'] + "\n"
          
         message = TextSendMessage(text=msg_to_user)
 
