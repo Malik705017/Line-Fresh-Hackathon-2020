@@ -66,9 +66,15 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+   
+    #從Line的event物件抓資料
+    userID = event.source.user_id
+    message_type = event.message.type
     msg_from_user = event.message.text
+    
     msg_to_user = ""
     message = ""
+
     if(msg_from_user == "我要發問"):
         msg_to_user = "請到以下網址發問：https://lineask-1c65c.web.app/#/"
         message = TextSendMessage(text=msg_to_user)
@@ -85,10 +91,7 @@ def handle_message(event):
         package_id=str(randNum1),
         sticker_id=str(randNum2)
         )
-    elif(msg_from_user.find("輸入資料：")!= -1):
-        #從Line的event物件抓資料
-        userID = event.source.user_id
-        message_type = event.message.type
+    elif(msg_from_user.find("輸入資料：")== 0):
         
         msg_to_user = "您的ID為: "+userID+"\n已將您的資料輸入至資料庫"
         message = TextSendMessage(text=msg_to_user)
@@ -101,7 +104,6 @@ def handle_message(event):
         'timestamp': data_time
         }
         
-
         col_name = "UserID:"+userID
         docu_name = "data "+str(imgdic.datacount)
         # 建立文件 必須給定 集合名稱 文件id
@@ -114,7 +116,20 @@ def handle_message(event):
         doc_ref.set(dic)
         imgdic.datacount += 1
         print(imgdic.datacount)
-       
+
+    elif(msg_from_user.find('讀取我的資料')!=-1):
+        col_name = "UserID:"+userID
+        
+        docs = db.collection(col_name).stream()
+
+        msg_to_user = "您先前的訊息資料為：\n"
+
+        for doc in docs:
+            print(f'{doc.id} => {doc.to_dict()}')
+            msg_to_user + doc.to_dict()['message'] + "\n"
+         
+        message = TextSendMessage(text=msg_to_user)
+
     elif(msg_from_user.find("問")== 0 and msg_from_user.find(" ")== 1):
         randNum = random.randint(0,100)
         msg_to_user = msg_from_user.replace("問 ","")+"的機率是"+str(randNum)+"%"
@@ -126,6 +141,7 @@ def handle_message(event):
         original_content_url=url,
         preview_image_url=url
         )
+    
     else:
         pass
 
