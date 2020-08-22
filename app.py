@@ -1,3 +1,18 @@
+# version 1.0.4 published at 2020/8/12 @Malik
+# 新增Firebase資料讀取功能
+
+# version 1.0.3
+# 新增Firebase資料寫入功能
+
+# version 1.0.2
+# 新增傳圖片訊息功能
+
+# version 1.0.1
+# 新增傳貼圖、回答隨機機率功能
+
+# version 1.0.0
+# echo機器人創建
+
 from flask import Flask, request, abort
 
 # ---------------------------------創建Line Bot start---------------------------------- #
@@ -53,7 +68,7 @@ def callback():
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
 
-    # 自己加的
+    # 印出event內容
     print(body)
 
     # handle webhook body
@@ -75,9 +90,11 @@ def handle_message(event):
     msg_to_user = ""
     message = ""
 
-    if(msg_from_user == "我要發問"):
-        msg_to_user = "請到以下網址發問：https://lineask-1c65c.web.app/#/"
+    if(msg_from_user == "指令表"):
+        
+        msg_to_user = "指令表內容如下\n："+"問+空格＋想問的問題\n"+"輸入資料：+想輸入的資料\n"+"讀取我的資料\n"+"抽卡"
         message = TextSendMessage(text=msg_to_user)
+    
     elif(msg_from_user == "貼圖"):
         randNum1 = random.randint(11537, 11549)
         randNum2 = 0
@@ -91,6 +108,8 @@ def handle_message(event):
         package_id=str(randNum1),
         sticker_id=str(randNum2)
         )
+    
+    # 輸入資料
     elif(msg_from_user.find("輸入資料：")== 0):
         
         msg_to_user = "您的ID為: "+userID+"\n已將您的資料輸入至資料庫"
@@ -117,19 +136,23 @@ def handle_message(event):
         imgdic.datacount += 1
         print(imgdic.datacount)
 
+    # 讀取資料
     elif(msg_from_user.find('讀取我的資料')!=-1):
         col_name = "UserID:"+userID
         
+        # 讀取collection(集合)
         docs = db.collection(col_name).stream()
 
         msg_to_user = "您先前的訊息資料為：\n"
 
+        # 讀取document(文件)
         for doc in docs:
             print(f'{doc.id} => {doc.to_dict()}')
-            msg_to_user += doc.to_dict()['message'] + "\n"
+            msg_to_user += ("時間：" + doc.to_dict()['timestamp'] + " 訊息：" + doc.to_dict()['message'] + "\n" )
          
         message = TextSendMessage(text=msg_to_user)
 
+    # 額外小功能
     elif(msg_from_user.find("問")== 0 and msg_from_user.find(" ")== 1):
         randNum = random.randint(0,100)
         msg_to_user = msg_from_user.replace("問 ","")+"的機率是"+str(randNum)+"%"
