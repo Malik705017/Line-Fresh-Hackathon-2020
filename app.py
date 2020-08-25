@@ -99,7 +99,7 @@ def handle_message(event):
         message = TextSendMessage(text=msg_to_user, quick_reply=QuickReply(items=[
                                    QuickReplyButton(action=MessageAction(label="label", text="text")),
                                    QuickReplyButton(action=CameraAction(label="拍照上傳")),
-                                   QuickReplyButton(action=CameraRollAction(label="從手機上傳")))
+                                   QuickReplyButton(action=CameraRollAction(label="從手機上傳"))
                                ]))
     elif(msg_from_user == "貼圖"):
         randNum1 = random.randint(11537, 11549)
