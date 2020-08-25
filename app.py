@@ -247,7 +247,7 @@ def handle_img_message(event):
             #alt_text = "flex message",
             #contents = contents
             #) 
-    message = "測試"
+    message = TextSendMessage(text="test")
     line_bot_api.reply_message(event.reply_token, message)
 
 import os
