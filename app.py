@@ -190,56 +190,81 @@ def handle_message(event):
 def handle_img_message(event):
     #contents = (寫好的json檔案)
     contents =  {
-  "type": "bubble",
-  "hero": {
-    "type": "image",
-    "size": "full",
-    "aspectRatio": "7.65:10",
-    "aspectMode": "cover",
-    "action": {
-      "type": "uri",
-      "uri": "http://linecorp.com/"
-    },
-    "url": "https://i.imgur.com/xiN8ykH.png"
-  },
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "text",
-        "text": "生鮮食材",
-        "weight": "bold",
-        "size": "xl"
-      },
-      {
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "body": {
         "type": "box",
         "layout": "vertical",
-        "margin": "lg",
-        "spacing": "sm",
         "contents": [
           {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "text": "儲存數量",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 1
-              },
-              {
-                "type": "text",
-                "text": "5個"
-              }
-            ]
+            "type": "image",
+            "size": "full",
+            "aspectMode": "cover",
+            "aspectRatio": "7.65:10",
+            "gravity": "top",
+            "url": "https://i.imgur.com/awJwVxH.png"
           }
-        ]
+        ],
+        "paddingAll": "0px"
       }
-    ]
-  }
+    },
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "image",
+            "size": "full",
+            "aspectMode": "cover",
+            "aspectRatio": "7.65:10",
+            "gravity": "top",
+            "url": "https://i.imgur.com/4CTc5Dv.png"
+          }
+        ],
+        "paddingAll": "0px"
+      }
+    },
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "image",
+            "size": "full",
+            "aspectMode": "cover",
+            "aspectRatio": "7.65:10",
+            "gravity": "top",
+            "url": "https://i.imgur.com/XcceXxm.png"
+          }
+        ],
+        "paddingAll": "0px"
+      }
+    },
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "image",
+            "size": "full",
+            "aspectMode": "cover",
+            "aspectRatio": "7.65:10",
+            "gravity": "top",
+            "url": "https://i.imgur.com/wUHp0pP.png"
+          }
+        ],
+        "paddingAll": "0px"
+      }
+    }
+  ]
 }
 
 
