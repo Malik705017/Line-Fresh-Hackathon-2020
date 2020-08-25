@@ -88,7 +88,6 @@ def sendDefaultMessage(reply_token):
     line_bot_api.reply_message(reply_token, message)
 
 def setUserStatus(user_id, status="default"):
-    data_time = event.timestamp
 
     dic = {
     'status': status,
@@ -207,6 +206,7 @@ def handle_message(event):
 # 處理訊息
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_img_message(event):
+    setUserStatus(event.source.user_id, "Image Uploaded")
     #contents = (寫好的json檔案)
     contents =  {
   "type": "bubble",
