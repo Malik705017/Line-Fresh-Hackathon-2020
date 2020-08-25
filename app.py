@@ -190,57 +190,57 @@ def handle_message(event):
 def handle_img_message(event):
     #contents = (寫好的json檔案)
     contents =  {
-                    "type": "bubble",
-                    "hero": {
-                        "type": "image",
-                        "url": "./flex_message_img/化妝品.png",
-                        "size": "full",
-                        "aspectRatio": "7.65:10",
-                        "aspectMode": "cover",
-                        "action": {
-                        "type": "uri",
-                        "uri": "http://linecorp.com/"
-                        }
-                    },
-                    "body": {
-                        "type": "box",
-                        "layout": "vertical",
-                        "contents": [
-                        {
-                            "type": "text",
-                            "text": "化妝品",
-                            "weight": "bold",
-                            "size": "xl"
-                        },
-                        {
-                            "type": "box",
-                            "layout": "vertical",
-                            "margin": "lg",
-                            "spacing": "sm",
-                            "contents": [
-                            {
-                                "type": "box",
-                                "layout": "baseline",
-                                "spacing": "sm",
-                                "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "儲存數量",
-                                    "color": "#aaaaaa",
-                                    "size": "sm",
-                                    "flex": 1
-                                },
-                                {
-                                    "type": "text",
-                                    "text": "5個"
-                                }
-                                ]
-                            }
-                            ]
-                        }
-                        ]
-                    }
-                }
+  "type": "bubble",
+  "hero": {
+    "type": "image",
+    "size": "full",
+    "aspectRatio": "7.65:10",
+    "aspectMode": "cover",
+    "action": {
+      "type": "uri",
+      "uri": "http://linecorp.com/"
+    },
+    "url": "./flex_message_img/food.png"
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "生鮮食材",
+        "weight": "bold",
+        "size": "xl"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "lg",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "text": "儲存數量",
+                "color": "#aaaaaa",
+                "size": "sm",
+                "flex": 1
+              },
+              {
+                "type": "text",
+                "text": "5個"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
 
 
     message = FlexSendMessage(
