@@ -213,7 +213,7 @@ def handle_img_message(event):
   "contents": [
     {
       "type": "bubble",
-      "size": "kilo",
+      "size": "micro",
       "body": {
         "type": "box",
         "layout": "vertical",
@@ -232,7 +232,7 @@ def handle_img_message(event):
     },
     {
       "type": "bubble",
-      "size": "kilo",
+      "size": "micro",
       "body": {
         "type": "box",
         "layout": "vertical",
@@ -251,7 +251,7 @@ def handle_img_message(event):
     },
     {
       "type": "bubble",
-      "size": "kilo",
+      "size": "micro",
       "body": {
         "type": "box",
         "layout": "vertical",
@@ -270,7 +270,7 @@ def handle_img_message(event):
     },
     {
       "type": "bubble",
-      "size": "kilo",
+      "size": "micro",
       "body": {
         "type": "box",
         "layout": "vertical",
