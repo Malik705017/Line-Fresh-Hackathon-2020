@@ -87,6 +87,25 @@ def sendDefaultMessage(reply_token):
                             ]))
     line_bot_api.reply_message(reply_token, message)
 
+def setUserStatus(user_id, status="default"):
+    data_time = event.timestamp
+
+    dic = {
+    'status': status,
+    }
+    
+    col_name = user_id
+    docu_name = "User Info"
+    # 建立文件 必須給定 集合名稱 文件id
+    # 即使 集合一開始不存在 都可以直接使用
+    # 語法
+    # doc_ref = db.collection("集合名稱").document("文件id")
+    doc_ref = db.collection(col_name).document(docu_name)
+
+    # doc_ref提供一個set的方法，input必須是dictionary
+    doc_ref.set(dic)
+
+
 # 問候訊息
 @handler.add(FollowEvent)
 def handle_follow(event):
