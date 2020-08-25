@@ -243,11 +243,11 @@ def handle_img_message(event):
                 }
 
 
-    #message = FlexSendMessage(
-            #alt_text = "flex message",
-            #contents = contents
-            #) 
-    message = TextSendMessage(text="test")
+    message = FlexSendMessage(
+            alt_text = "flex message",
+            contents = contents
+            ) 
+    
     line_bot_api.reply_message(event.reply_token, message)
 
 import os
