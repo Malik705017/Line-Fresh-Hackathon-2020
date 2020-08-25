@@ -100,7 +100,7 @@ def handle_message(event):
                                    QuickReplyButton(action=MessageAction(label="label", text="text")),
                                    QuickReplyButton(action=CameraAction(label="拍照上傳")),
                                    QuickReplyButton(action=CameraRollAction(label="從手機上傳"))
-                               ]))
+                               ]))       
     elif(msg_from_user == "貼圖"):
         randNum1 = random.randint(11537, 11549)
         randNum2 = 0
@@ -176,7 +176,70 @@ def handle_message(event):
 
     line_bot_api.reply_message(event.reply_token, message)
     
+# 處理訊息
+@handler.add(MessageEvent, message=ImageMessage)
+def handle_img_message(event):
+    #contents = (寫好的json檔案)
+    contents =  {
+                    "type": "bubble",
+                    "hero": {
+                        "type": "image",
+                        "url": "./flex_message_img/化妝品.png",
+                        "size": "full",
+                        "aspectRatio": "7.65:10",
+                        "aspectMode": "cover",
+                        "action": {
+                        "type": "uri",
+                        "uri": "http://linecorp.com/"
+                        }
+                    },
+                    "body": {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                        {
+                            "type": "text",
+                            "text": "化妝品",
+                            "weight": "bold",
+                            "size": "xl"
+                        },
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "margin": "lg",
+                            "spacing": "sm",
+                            "contents": [
+                            {
+                                "type": "box",
+                                "layout": "baseline",
+                                "spacing": "sm",
+                                "contents": [
+                                {
+                                    "type": "text",
+                                    "text": "儲存數量",
+                                    "color": "#aaaaaa",
+                                    "size": "sm",
+                                    "flex": 1
+                                },
+                                {
+                                    "type": "text",
+                                    "text": "5個"
+                                }
+                                ]
+                            }
+                            ]
+                        }
+                        ]
+                    }
+                }
 
+
+    message = FlexSendMessage(
+            alt_text = "flex message",
+            contents = contents
+            ) 
+    
+    line_bot_api.reply_message(event.reply_token, message)
 
 import os
 if __name__ == "__main__":
