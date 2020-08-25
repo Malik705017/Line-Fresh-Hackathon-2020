@@ -200,7 +200,7 @@ def handle_img_message(event):
       "type": "uri",
       "uri": "http://linecorp.com/"
     },
-    "url": "./flex_message_img/food.png"
+    "url": "https://i.imgur.com/xiN8ykH.png"
   },
   "body": {
     "type": "box",
