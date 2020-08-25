@@ -97,7 +97,7 @@ def handle_message(event):
     elif(msg_from_user.find("提醒我") == 0):
         msg_to_user = msg_from_user.replace("我","你") + "要上傳相關照片嗎？"
         message = TextSendMessage(text=msg_to_user, quick_reply=QuickReply(items=[
-                                   QuickReplyButton(action=MessageAction(label="label", text="text"),
+                                   QuickReplyButton(action=MessageAction(label="label", text="text")),
                                    QuickReplyButton(action=CameraAction(label="拍照上傳")),
                                    QuickReplyButton(action=CameraRollAction(label="從手機上傳")))
                                ]))
