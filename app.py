@@ -40,10 +40,10 @@ from firebase_admin import firestore
 from firebase_admin import storage
 
 # 引用私密金鑰
-cred = credentials.Certificate("line--countdown-firebase-adminsdk-e43zw-fd20d58e12.json", {"storageBucket": "gs://line--countdown.appspot.com"})
+cred = credentials.Certificate("line--countdown-firebase-adminsdk-e43zw-fd20d58e12.json")
 
 # 初始化firebase，注意不能重複初始化
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app({credential: cred, storageBucket: "gs://line--countdown.appspot.com"})
 
 # 初始化firestore
 db = firestore.client()
@@ -220,8 +220,10 @@ def handle_img_message(event):
     with open(temp_file_path, 'rb') as photo:
         blob.upload_from_file(photo)
 
-	import os
-	os.remove(temp_file_path)
+    import os
+    os.remove(temp_file_path)
+
+    setUserStatus(event.source.user_id, "Image Uploaded Successfully")
 
     #contents = (寫好的json檔案)
     contents =  {
