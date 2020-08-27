@@ -144,7 +144,7 @@ def handle_message(event):
             doc_ref = db.collection(event.source.user_id).document(last_image)
             doc_ref.set({"category": msg_from_user})
 
-            message = TextSendMessage(text="已將此物品歸類至「" + msg_from_user + "」")
+            message = "已將此物品歸類至「" + msg_from_user + "」"
             sendDefaultMessage(event.reply_token, message)
             setUserStatus(event.source.user_id, "Standby")
 
