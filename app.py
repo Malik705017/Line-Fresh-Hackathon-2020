@@ -208,24 +208,31 @@ def handle_message(event):
 # 處理訊息
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_img_message(event):
-    setUserStatus(event.source.user_id, "Image Uploaded")
-    message_content = line_bot_api.get_message_content(event.message.id)
+    if getUserStatus(event.source.user_id) == "Standby":
+        message_content = line_bot_api.get_message_content(event.message.id)
 
-    temp_file_path = event.source.user_id
-    with open(temp_file_path, 'wb') as fd:
-        for chunk in message_content.iter_content():
-            fd.write(chunk)
+        temp_file_path = event.source.user_id
+        with open(temp_file_path, 'wb') as fd:
+            for chunk in message_content.iter_content():
+                fd.write(chunk)
 
-    saving_path = str(event.source.user_id) + "/" + str(event.timestamp) + ".jpg"
-    blob = bucket.blob(saving_path)
+        saving_path = str(event.source.user_id) + "/" + str(event.timestamp) + ".jpg"
+        blob = bucket.blob(saving_path)
 
-    with open(temp_file_path, 'rb') as photo:
-        blob.upload_from_file(photo)
+        with open(temp_file_path, 'rb') as photo:
+            blob.upload_from_file(photo)
 
-    import os
-    os.remove(temp_file_path)
+        import os
+        os.remove(temp_file_path)
+        dic = {
+        'image just uploaded': saving_path,
+        }
+        
+        doc_ref = db.collection(user_id).document("User Info")
 
-    setUserStatus(event.source.user_id, "Image Uploaded Successfully")
+        doc_ref.set(dic)
+        setUserStatus(event.source.user_id, "Image Uploaded Successfully")
+
 
     #contents = (寫好的json檔案)
     contents =  {
