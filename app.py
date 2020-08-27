@@ -91,20 +91,23 @@ def sendDefaultMessage(reply_token):
                             ]))
     line_bot_api.reply_message(reply_token, message)
 
-def setUserStatus(user_id, status="default"):
-
-    dic = {
-    'status': status,
-    }
-    
-    doc_ref = db.collection(user_id).document("User Info")
-
-    doc_ref.set(dic)
-
-def getUserStatus(user_id):
+def getUserInfo(user_id):
     doc_ref = db.collection(user_id).document('User Info')
 
-    docs = doc_ref.get().to_dict()
+    return doc_ref.get().to_dict()
+
+def setUserInfo(user_id, docs):
+    doc_ref = db.collection(user_id).documnet('User Info')
+    
+    doc_ref.set(docs)
+
+def setUserStatus(user_id, status="default"):
+    docs = getUserInfo(user_id)
+    docs['status'] = status
+    setUserInfo(user_id, docs)
+
+def getUserStatus(user_id):
+    docs = getUserInfo(user_id)
     return docs['status']
 
 # 問候訊息
@@ -224,13 +227,12 @@ def handle_img_message(event):
 
         import os
         os.remove(temp_file_path)
-        dic = {
-        'image just uploaded': saving_path,
-        }
         
-        doc_ref = db.collection(event.source.user_id).document("User Info")
 
-        doc_ref.set(dic)
+        docs = getUserInfo(event.source.user_id)
+        docs['image just uploaded'] = saving_path
+        setUserInfo(event.source.user_id, docs)
+
         setUserStatus(event.source.user_id, "Image Uploaded Successfully")
 
 
