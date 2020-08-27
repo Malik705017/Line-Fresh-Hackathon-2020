@@ -216,7 +216,7 @@ def handle_img_message(event):
         for chunk in message_content.iter_content():
             fd.write(chunk)
 
-    saving_path = str(event.source.user_id) + "/" + str(event.timestamp)
+    saving_path = str(event.source.user_id) + "/" + str(event.timestamp) + ".jpg"
     blob = bucket.blob(saving_path)
 
     with open(temp_file_path, 'rb') as photo:
