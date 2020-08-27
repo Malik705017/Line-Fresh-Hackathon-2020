@@ -83,8 +83,11 @@ def callback():
     return 'OK'
 
 
-def sendDefaultMessage(reply_token):
-    msg_to_user = "上傳照片以加入提醒清單"
+def sendDefaultMessage(reply_token, text=""):
+    msg_to_user = text 
+    if msg_to_user:
+        msg_to_user = msg_to_user + '\n'
+    msg_to_user = msg_to_user + "上傳照片以加入提醒清單"
     message = TextSendMessage(text=msg_to_user, quick_reply=QuickReply(items=[
                                 QuickReplyButton(action=CameraAction(label="拍照上傳")),
                                 QuickReplyButton(action=CameraRollAction(label="從手機上傳"))
@@ -142,8 +145,7 @@ def handle_message(event):
             doc_ref.set({"category": msg_from_user})
 
             message = TextSendMessage(text="已將此物品歸類至「" + msg_from_user + "」")
-            line_bot_api.reply_message(event.reply_token, message)
-            sendDefaultMessage(event.reply_token)
+            sendDefaultMessage(event.reply_token, message)
             setUserStatus(event.source.user_id, "Standby")
 
     elif(msg_from_user == "貼圖"):
