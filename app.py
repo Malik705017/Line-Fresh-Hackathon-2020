@@ -44,7 +44,7 @@ from firebase_admin import storage
 cred = credentials.Certificate("line--countdown-firebase-adminsdk-e43zw-fd20d58e12.json")
 
 # 初始化firebase，注意不能重複初始化
-firebase_admin.initialize_app(credential= cred, storageBucket="gs://line--countdown.appspot.com")
+firebase_admin.initialize_app(credential= cred, options={storageBucket: "gs://line--countdown.appspot.com"})
 
 # 初始化firestore
 db = firestore.client()
