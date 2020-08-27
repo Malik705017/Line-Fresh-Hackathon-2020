@@ -37,15 +37,17 @@ handler = WebhookHandler('7ee8f5c2aa2dc3a9a0dc6e52ed7241a6')
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+from firebase_admin import storage
 
 # 引用私密金鑰
-cred = credentials.Certificate("line--countdown-firebase-adminsdk-e43zw-fd20d58e12.json")
+cred = credentials.Certificate("line--countdown-firebase-adminsdk-e43zw-fd20d58e12.json", {"storageBucket": "gs://line--countdown.appspot.com"})
 
 # 初始化firebase，注意不能重複初始化
 firebase_admin.initialize_app(cred)
 
 # 初始化firestore
 db = firestore.client()
+bucket = storage.bucket()
 
 # -------------------------------連接Firebase資料庫 end-------------------------------- #
 
@@ -93,17 +95,15 @@ def setUserStatus(user_id, status="default"):
     'status': status,
     }
     
-    col_name = user_id
-    docu_name = "User Info"
-    # 建立文件 必須給定 集合名稱 文件id
-    # 即使 集合一開始不存在 都可以直接使用
-    # 語法
-    # doc_ref = db.collection("集合名稱").document("文件id")
-    doc_ref = db.collection(col_name).document(docu_name)
+    doc_ref = db.collection(user_id).document("User Info")
 
-    # doc_ref提供一個set的方法，input必須是dictionary
     doc_ref.set(dic)
 
+def getUserStatus(user_id):
+    doc_ref = db.collection(user_id).document('User Info')
+
+    docs = doc_ref.get().to_dict()
+    return docs['status']
 
 # 問候訊息
 @handler.add(FollowEvent)
@@ -207,6 +207,22 @@ def handle_message(event):
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_img_message(event):
     setUserStatus(event.source.user_id, "Image Uploaded")
+    message_content = line_bot_api.get_message_content(event.message.id)
+
+    temp_file_path = event.source.user_id
+    with open(temp_file_path, 'wb') as fd:
+        for chunk in message_content.iter_content():
+            fd.write(chunk)
+
+    saving_path = event.source.user_id + "/" + event.timestamp
+    blob = bucket.blob(saving_path)
+
+    with open(temp_file_path, 'rb') as photo:
+        blob.upload_from_file(photo)
+
+	import os
+	os.remove(temp_file_path)
+
     #contents = (寫好的json檔案)
     contents =  {
   "type": "bubble",
