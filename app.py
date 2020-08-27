@@ -133,6 +133,15 @@ def handle_message(event):
         
         msg_to_user = "指令表內容如下\n："+"問+空格＋想問的問題\n"+"輸入資料：+想輸入的資料\n"+"讀取我的資料\n"+"抽卡"
         message = TextSendMessage(text=msg_to_user)
+
+    elif(msg_from_user == "化妝保養品" or msg_from_user == "生鮮食材" or msg_from_user == "零食甜點" or msg_from_user == "醫療藥用品"):
+        if(getUserStatus(event.source.user_id) == "Image Uploaded Successfully"):
+            docs = getUserInfo(event.source.user_id)
+            last_image = docs['image just uploaded']
+            doc_ref = db.collection(event.source.user_id).document(last_image)
+            doc_ref.set({"category": msg_from_user})
+            setUserStatus(event.source.user_id, "Standby")
+
     elif(msg_from_user == "貼圖"):
         randNum1 = random.randint(11537, 11549)
         randNum2 = 0
