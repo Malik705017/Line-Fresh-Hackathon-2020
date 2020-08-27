@@ -223,6 +223,8 @@ def handle_img_message(event):
 	import os
 	os.remove(temp_file_path)
 
+    setUserStatus(event.source.user_id, "Image Uploaded Successfully")
+
     #contents = (寫好的json檔案)
     contents =  {
   "type": "carousel",
