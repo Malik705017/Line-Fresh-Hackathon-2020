@@ -116,6 +116,7 @@ def getUserStatus(user_id):
 # 問候訊息
 @handler.add(FollowEvent)
 def handle_follow(event):
+    setUserStatus(event.source.user_id, "Standby")
     sendDefaultMessage(event.reply_token)
 
 
