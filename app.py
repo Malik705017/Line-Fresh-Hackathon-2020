@@ -130,7 +130,7 @@ def handle_message(event):
             setUserStatus(event.source.user_id, "Standby")
 
     
-# 處理訊息
+# 處理圖片訊息（接收到圖片訊息時啟動）
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_img_message(event):
     if getUserStatus(event.source.user_id) == "Standby":
@@ -173,6 +173,11 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
+            "action": {
+              "type": "message",
+              "label": "action",
+              "text": "化妝保養品"
+            },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
@@ -192,6 +197,11 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
+            "action": {
+              "type": "message",
+              "label": "action",
+              "text": "生鮮食材"
+            },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
@@ -211,6 +221,11 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
+            "action": {
+              "type": "message",
+              "label": "action",
+              "text": "零食甜點"
+            },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
@@ -230,6 +245,11 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
+             "action": {
+              "type": "message",
+              "label": "action",
+              "text": "醫療藥用品"
+            },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
