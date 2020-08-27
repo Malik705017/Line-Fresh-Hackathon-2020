@@ -140,6 +140,10 @@ def handle_message(event):
             last_image = docs['image just uploaded']
             doc_ref = db.collection(event.source.user_id).document(last_image)
             doc_ref.set({"category": msg_from_user})
+
+            message = TextSendMessage(text="已將此物品歸類至「" + msg_from_user + "」")
+            line_bot_api.reply_message(event.reply_token, message)
+            sendDefaultMessage(event.reply_token)
             setUserStatus(event.source.user_id, "Standby")
 
     elif(msg_from_user == "貼圖"):
@@ -215,7 +219,6 @@ def handle_message(event):
     else:
         pass
 
-    line_bot_api.reply_message(event.reply_token, message)
     
 # 處理訊息
 @handler.add(MessageEvent, message=ImageMessage)
@@ -228,7 +231,8 @@ def handle_img_message(event):
             for chunk in message_content.iter_content():
                 fd.write(chunk)
 
-        saving_path = str(event.source.user_id) + "/" + str(event.timestamp) + ".jpg"
+        file_name = str(event.timestamp) + ".jpg"
+        saving_path = str(event.source.user_id) + "/" + file_name
         blob = bucket.blob(saving_path)
 
         with open(temp_file_path, 'rb') as photo:
@@ -239,7 +243,7 @@ def handle_img_message(event):
         
 
         docs = getUserInfo(event.source.user_id)
-        docs['image just uploaded'] = saving_path
+        docs['image just uploaded'] = file_name
         setUserInfo(event.source.user_id, docs)
 
         setUserStatus(event.source.user_id, "Image Uploaded Successfully")
