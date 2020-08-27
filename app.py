@@ -1,18 +1,3 @@
-# version 1.0.4 published at 2020/8/12 @Malik
-# 新增Firebase資料讀取功能
-
-# version 1.0.3
-# 新增Firebase資料寫入功能
-
-# version 1.0.2
-# 新增傳圖片訊息功能
-
-# version 1.0.1
-# 新增傳貼圖、回答隨機機率功能
-
-# version 1.0.0
-# echo機器人創建
-
 
 from flask import Flask, request, abort
 
@@ -33,7 +18,6 @@ line_bot_api = LineBotApi('2DmvpJgdmXcSHowzVSWZVfiF3aqsHskszknRMN7yicHtjlpV64tAE
 handler = WebhookHandler('7ee8f5c2aa2dc3a9a0dc6e52ed7241a6')
 # ---------------------------------創建Line Bot end----------------------------------- #
 
-
 # ------------------------------連接Firebase資料庫 start------------------------------- #
 import firebase_admin
 from firebase_admin import credentials
@@ -42,7 +26,6 @@ from firebase_admin import storage
 
 # 引用私密金鑰
 cred = credentials.Certificate("line--countdown-firebase-adminsdk-e43zw-fd20d58e12.json")
-
 
 # 初始化firebase，注意不能重複初始化
 firebase_admin.initialize_app(credential= cred, options={"storageBucket": "line--countdown.appspot.com"})
@@ -53,10 +36,8 @@ bucket = storage.bucket()
 
 # -------------------------------連接Firebase資料庫 end-------------------------------- #
 
-
 # --------------------------------引用其他套件 start------------------------------------ #
-import random
-import imgdic
+
 # ---------------------------------引用其他套件 end------------------------------------- #
 
 
@@ -137,13 +118,7 @@ def handle_message(event):
     msg_to_user = ""
     message = ""
 
-
-    if(msg_from_user == "指令表"):
-        
-        msg_to_user = "指令表內容如下\n："+"問+空格＋想問的問題\n"+"輸入資料：+想輸入的資料\n"+"讀取我的資料\n"+"抽卡"
-        message = TextSendMessage(text=msg_to_user)
-
-    elif(msg_from_user == "化妝保養品" or msg_from_user == "生鮮食材" or msg_from_user == "零食甜點" or msg_from_user == "醫療藥用品"):
+    if(msg_from_user == "化妝保養品" or msg_from_user == "生鮮食材" or msg_from_user == "零食甜點" or msg_from_user == "醫療藥用品"):
         if(getUserStatus(event.source.user_id) == "Image Uploaded Successfully"):
             docs = getUserInfo(event.source.user_id)
             last_image = docs['image just uploaded']
@@ -153,79 +128,6 @@ def handle_message(event):
             message = "已將此物品歸類至「" + msg_from_user + "」"
             sendDefaultMessage(event.reply_token, message)
             setUserStatus(event.source.user_id, "Standby")
-
-    elif(msg_from_user == "貼圖"):
-        randNum1 = random.randint(11537, 11549)
-        randNum2 = 0
-        if(randNum1 == 11537):
-            randNum2 = random.randint(52002734, 52002773)
-        elif(randNum1 == 11538):
-            randNum2 = random.randint(51626494, 51626533)
-        elif(randNum1 == 11539):
-            randNum2 = random.randint(52114110, 52114149)
-        message = StickerSendMessage(
-        package_id=str(randNum1),
-        sticker_id=str(randNum2)
-        )
-    
-    # 輸入資料
-    elif(msg_from_user.find("輸入資料：")== 0):
-        
-        msg_to_user = "您的ID為: "+userID+"\n已將您的資料輸入至資料庫"
-        message = TextSendMessage(text=msg_to_user)
-
-        data_message = msg_from_user.replace("輸入資料：","")
-        data_time = event.timestamp
-
-        dic = {
-        'message':data_message,
-        'timestamp': data_time
-        }
-        
-        col_name = "UserID:"+userID
-        docu_name = "data "+str(imgdic.datacount)
-        # 建立文件 必須給定 集合名稱 文件id
-        # 即使 集合一開始不存在 都可以直接使用
-        # 語法
-        # doc_ref = db.collection("集合名稱").document("文件id")
-        doc_ref = db.collection(col_name).document(docu_name)
-
-        # doc_ref提供一個set的方法，input必須是dictionary
-        doc_ref.set(dic)
-        imgdic.datacount += 1
-        print(imgdic.datacount)
-
-    # 讀取資料
-    elif(msg_from_user.find('讀取我的資料')!=-1):
-        col_name = "UserID:"+userID
-        
-        # 讀取collection(集合)
-        docs = db.collection(col_name).stream()
-
-        msg_to_user = "您先前的訊息資料為：\n"
-
-        # 讀取document(文件)
-        for doc in docs:
-            print(f'{doc.id} => {doc.to_dict()}')
-            msg_to_user += ("時間：" + doc.to_dict()['timestamp'] + " 訊息：" + doc.to_dict()['message'] + "\n" )
-         
-        message = TextSendMessage(text=msg_to_user)
-
-    # 額外小功能
-    elif(msg_from_user.find("問")== 0 and msg_from_user.find(" ")== 1):
-        randNum = random.randint(0,100)
-        msg_to_user = msg_from_user.replace("問 ","")+"的機率是"+str(randNum)+"%"
-        message = TextSendMessage(text=msg_to_user)
-    
-    elif(msg_from_user.find("抽")== 0 and msg_from_user.find("卡")== 1 ):
-        url = imgdic.returnCard()
-        message = ImageSendMessage(
-        original_content_url=url,
-        preview_image_url=url
-        )
-    
-    else:
-        pass
 
     
 # 處理訊息
