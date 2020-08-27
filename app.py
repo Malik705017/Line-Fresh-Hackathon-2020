@@ -43,6 +43,7 @@ from firebase_admin import storage
 # 引用私密金鑰
 cred = credentials.Certificate("line--countdown-firebase-adminsdk-e43zw-fd20d58e12.json")
 
+
 # 初始化firebase，注意不能重複初始化
 firebase_admin.initialize_app(credential= cred, options={storageBucket: "gs://line--countdown.appspot.com"})
 
