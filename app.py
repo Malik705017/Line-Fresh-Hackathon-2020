@@ -94,6 +94,11 @@ def sendDefaultMessage(reply_token, text=""):
                             ]))
     line_bot_api.reply_message(reply_token, message)
 
+def initUserInfo(user_id):
+    doc_ref = db.collection(user_id).document('User Info')
+
+    doc_ref.set({"status": "Standby"})
+
 def getUserInfo(user_id):
     doc_ref = db.collection(user_id).document('User Info')
 
@@ -116,7 +121,7 @@ def getUserStatus(user_id):
 # 問候訊息
 @handler.add(FollowEvent)
 def handle_follow(event):
-    setUserStatus(event.source.user_id, "Standby")
+    initUserInfo(event.source.user_id)
     sendDefaultMessage(event.reply_token)
 
 
