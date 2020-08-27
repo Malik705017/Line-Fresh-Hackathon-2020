@@ -220,8 +220,8 @@ def handle_img_message(event):
     with open(temp_file_path, 'rb') as photo:
         blob.upload_from_file(photo)
 
-	import os
-	os.remove(temp_file_path)
+    import os
+    os.remove(temp_file_path)
 
     setUserStatus(event.source.user_id, "Image Uploaded Successfully")
 
