@@ -228,7 +228,7 @@ def handle_img_message(event):
         'image just uploaded': saving_path,
         }
         
-        doc_ref = db.collection(user_id).document("User Info")
+        doc_ref = db.collection(event.source.user_id).document("User Info")
 
         doc_ref.set(dic)
         setUserStatus(event.source.user_id, "Image Uploaded Successfully")
