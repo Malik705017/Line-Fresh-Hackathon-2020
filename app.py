@@ -97,7 +97,7 @@ def getUserInfo(user_id):
     return doc_ref.get().to_dict()
 
 def setUserInfo(user_id, docs):
-    doc_ref = db.collection(user_id).documnet('User Info')
+    doc_ref = db.collection(user_id).document('User Info')
     
     doc_ref.set(docs)
 
