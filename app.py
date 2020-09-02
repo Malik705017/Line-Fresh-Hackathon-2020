@@ -187,7 +187,7 @@ def handle_img_message(event):
         "paddingAll": "0px"
       }
     },
-    {
+        {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -197,21 +197,21 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
-            "action": {
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
-              "text": "生鮮食材"
+              "text": "化妝保養品"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/DfBKjG2.png"
+            "url": "https://i.imgur.com/n4GTDov.png"
           }
         ],
         "paddingAll": "0px"
       }
     },
-    {
+        {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -221,21 +221,21 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
-            "action": {
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
-              "text": "零食甜點"
+              "text": "化妝保養品"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/iXJ2LYM.png"
+            "url": "https://i.imgur.com/n4GTDov.png"
           }
         ],
         "paddingAll": "0px"
       }
     },
-    {
+        {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -245,21 +245,21 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
-             "action": {
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
-              "text": "醫療藥用品"
+              "text": "化妝保養品"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/seM9Ff3.png"
+            "url": "https://i.imgur.com/n4GTDov.png"
           }
         ],
         "paddingAll": "0px"
       }
     },
-    {
+        {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -269,21 +269,21 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
-            "action": {
-              "type": "message",
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
+              "type": "message",
               "label": "action",
-              "text": "冷凍料理"
+              "text": "化妝保養品"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/hO3hYW8.png"
+            "url": "https://i.imgur.com/n4GTDov.png"
           }
         ],
         "paddingAll": "0px"
       }
     },
-    {
+        {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -293,21 +293,21 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
-            "action": {
-              "type": "message",
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
+              "type": "message",
               "label": "action",
-              "text": "料理用品"
+              "text": "化妝保養品"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/6nQMDds.png"
+            "url": "https://i.imgur.com/n4GTDov.png"
           }
         ],
         "paddingAll": "0px"
       }
     },
-    {
+        {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -317,15 +317,15 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
-            "action": {
-              "type": "message",
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
+              "type": "message",
               "label": "action",
-              "text": "保健食品"
+              "text": "化妝保養品"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/karOgVl.png"
+            "url": "https://i.imgur.com/n4GTDov.png"
           }
         ],
         "paddingAll": "0px"
