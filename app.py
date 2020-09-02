@@ -222,7 +222,7 @@ def handle_img_message(event):
             "type": "image",
             "size": "full",
             "action": {
-              "type": "message",
+              "type": "message",
               "label": "action",
               "text": "零食甜點"
             },
