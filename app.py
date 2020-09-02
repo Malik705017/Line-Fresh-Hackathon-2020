@@ -117,13 +117,7 @@ def handle_message(event):
     
     msg_to_user = ""
     message = ""
-    items = ["化妝保養品",
-              "生鮮食材",
-              "冷凍料理",
-              "零食甜點",
-              "料理用品",
-              "保健食品",
-              "醫療藥用品"]
+    items = ["化妝保養品","生鮮食材","冷凍料理","零食甜點","料理用品","保健食品","醫療藥用品"]
     match = False
     for item in items:
       if(msg_from_user == item):
