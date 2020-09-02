@@ -173,7 +173,7 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
-            "action": {
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
               "text": "化妝保養品"
@@ -181,7 +181,7 @@ def handle_img_message(event):
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/awJwVxH.png"
+            "url": "https://i.imgur.com/n4GTDov.png"
           }
         ],
         "paddingAll": "0px"
@@ -205,7 +205,7 @@ def handle_img_message(event):
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/4CTc5Dv.png"
+            "url": "https://i.imgur.com/DfBKjG2.png"
           }
         ],
         "paddingAll": "0px"
@@ -222,14 +222,14 @@ def handle_img_message(event):
             "type": "image",
             "size": "full",
             "action": {
-              "type": "message",
+              "type": "message",
               "label": "action",
               "text": "零食甜點"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/XcceXxm.png"
+            "url": "https://i.imgur.com/iXJ2LYM.png"
           }
         ],
         "paddingAll": "0px"
@@ -253,7 +253,79 @@ def handle_img_message(event):
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/wUHp0pP.png"
+            "url": "https://i.imgur.com/seM9Ff3.png"
+          }
+        ],
+        "paddingAll": "0px"
+      }
+    },
+    {
+      "type": "bubble",
+      "size": "micro",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "image",
+            "size": "full",
+            "action": {
+              "type": "message",
+              "label": "action",
+              "text": "冷凍料理"
+            },
+            "aspectMode": "cover",
+            "aspectRatio": "7.65:10",
+            "gravity": "top",
+            "url": "https://i.imgur.com/hO3hYW8.png"
+          }
+        ],
+        "paddingAll": "0px"
+      }
+    },
+    {
+      "type": "bubble",
+      "size": "micro",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "image",
+            "size": "full",
+            "action": {
+              "type": "message",
+              "label": "action",
+              "text": "料理用品"
+            },
+            "aspectMode": "cover",
+            "aspectRatio": "7.65:10",
+            "gravity": "top",
+            "url": "https://i.imgur.com/6nQMDds.png"
+          }
+        ],
+        "paddingAll": "0px"
+      }
+    },
+    {
+      "type": "bubble",
+      "size": "micro",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "image",
+            "size": "full",
+            "action": {
+              "type": "message",
+              "label": "action",
+              "text": "保健食品"
+            },
+            "aspectMode": "cover",
+            "aspectRatio": "7.65:10",
+            "gravity": "top",
+            "url": "https://i.imgur.com/karOgVl.png"
           }
         ],
         "paddingAll": "0px"
