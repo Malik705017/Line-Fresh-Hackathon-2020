@@ -117,8 +117,20 @@ def handle_message(event):
     
     msg_to_user = ""
     message = ""
+    items = ["化妝保養品",
+              "生鮮食材",
+              "冷凍料理",
+              "零食甜點",
+              "料理用品",
+              "保健食品",
+              "醫療藥用品"]
+    match = False
+    for item in items:
+      if(msg_from_user == item):
+        match = True
+        break
 
-    if(msg_from_user == "化妝保養品" or msg_from_user == "生鮮食材" or msg_from_user == "零食甜點" or msg_from_user == "醫療藥用品"):
+    if(match == True):
         if(getUserStatus(event.source.user_id) == "Image Uploaded Successfully"):
             docs = getUserInfo(event.source.user_id)
             last_image = docs['image just uploaded']
@@ -200,12 +212,12 @@ def handle_img_message(event):
             "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
-              "text": "化妝保養品"
+              "text": "生鮮食材"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/n4GTDov.png"
+            "url": "https://i.imgur.com/DfBKjG2.png"
           }
         ],
         "paddingAll": "0px"
@@ -224,12 +236,12 @@ def handle_img_message(event):
             "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
-              "text": "化妝保養品"
+              "text": "冷凍料理"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/n4GTDov.png"
+            "url": "https://i.imgur.com/hO3hYW8.png"
           }
         ],
         "paddingAll": "0px"
@@ -248,12 +260,12 @@ def handle_img_message(event):
             "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
-              "text": "化妝保養品"
+              "text": "零食甜點"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/n4GTDov.png"
+            "url": "https://i.imgur.com/iXJ2LYM.png"
           }
         ],
         "paddingAll": "0px"
@@ -272,12 +284,12 @@ def handle_img_message(event):
             "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
-              "text": "化妝保養品"
+              "text": "料理用品"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/n4GTDov.png"
+            "url": "https://i.imgur.com/6nQMDds.png"
           }
         ],
         "paddingAll": "0px"
@@ -296,12 +308,12 @@ def handle_img_message(event):
             "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
-              "text": "化妝保養品"
+              "text": "保健食品"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/n4GTDov.png"
+            "url": "https://i.imgur.com/karOgVl.png"
           }
         ],
         "paddingAll": "0px"
@@ -320,12 +332,12 @@ def handle_img_message(event):
             "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
-              "text": "化妝保養品"
+              "text": "醫療藥用品"
             },
             "aspectMode": "cover",
             "aspectRatio": "7.65:10",
             "gravity": "top",
-            "url": "https://i.imgur.com/n4GTDov.png"
+            "url": "https://i.imgur.com/seM9Ff3.png"
           }
         ],
         "paddingAll": "0px"
