@@ -107,6 +107,7 @@ def handle_follow(event):
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
+    print("event: ", event)
     if (getUserStatus(event.source.user_id) == "wait_for_expire_date"):
         docs = getUserInfo(event.source.user_id)
         last_image = docs['image just uploaded']
