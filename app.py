@@ -107,7 +107,7 @@ def handle_follow(event):
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
-    if (getUserStatus(event.source.user_id) == "wait_for_select_category"):
+    if (getUserStatus(event.source.user_id) == "wait_for_expire_date"):
         docs = getUserInfo(event.source.user_id)
         last_image = docs['image just uploaded']
         doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
