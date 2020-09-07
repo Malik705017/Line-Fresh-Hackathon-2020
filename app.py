@@ -115,7 +115,7 @@ def handle_postback(event):
         docs['expire_date'] = event.postback.params['date']
         doc_ref.set(docs)
         setUserStatus(event.source.user_id, "Standby")
-        sendDefaultMessage(event.reply_token)
+        sendDefaultMessage(event.reply_token, "有效日期為「"+event.postback.params['date']+"」，我會在到期前提醒你ㄉ")
 
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
