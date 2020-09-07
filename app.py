@@ -105,6 +105,17 @@ def handle_follow(event):
     initUserInfo(event.source.user_id)
     sendDefaultMessage(event.reply_token)
 
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    if (getUserStatus(event.source.user_id) == "wait_for_select_category"):
+        docs = getUserInfo(event.source.user_id)
+        last_image = docs['image just uploaded']
+        doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
+        docs = doc_ref.get().to_dict()
+        docs['expire_date'] = event.postback.params.date
+        doc_ref.set(docs)
+        setUserStatus(event.source.user_id, "Standby")
+        sendDefaultMessage(event.reply_token)
 
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
@@ -137,14 +148,6 @@ def handle_message(event):
                             ]))
             line_bot_api.reply_message(event.reply_token, message)
             setUserStatus(event.source.user_id, "wait_for_expire_date")
-    elif(getUserStatus(event.source.user_id) == "wait_for_expire_date"):
-        docs = getUserInfo(event.source.user_id)
-        last_image = docs['image just uploaded']
-        doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
-        docs = doc_ref.get().to_dict()
-        docs['expire_date'] = event.postback.params.date
-        doc_ref.set(docs)
-        setUserStatus(event.source.user_id, "Standby")
     
 # 處理圖片訊息（接收到圖片訊息時啟動）
 @handler.add(MessageEvent, message=ImageMessage)
