@@ -129,7 +129,7 @@ def handle_message(event):
             docs = getUserInfo(event.source.user_id)
             last_image = docs['image just uploaded']
             doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
-            doc_ref.set({"category": msg_from_user})
+            doc_ref.set({"category": msg_from_user, "file": last_image})
 
             message = "已將此物品歸類至「" + msg_from_user + "」"
             sendDefaultMessage(event.reply_token, message)
