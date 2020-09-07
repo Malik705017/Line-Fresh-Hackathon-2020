@@ -81,12 +81,12 @@ def initUserInfo(user_id):
     doc_ref.set({"status": "Standby"})
 
 def getUserInfo(user_id):
-    doc_ref = db.collection(user_id).document('User Info')
+    doc_ref = db.collection('users').document(user_id)
 
     return doc_ref.get().to_dict()
 
 def setUserInfo(user_id, docs):
-    doc_ref = db.collection(user_id).document('User Info')
+    doc_ref = db.collection('users').document(user_id)
     
     doc_ref.set(docs)
 
@@ -122,7 +122,7 @@ def handle_message(event):
         if(getUserStatus(event.source.user_id) == "Image Uploaded Successfully"):
             docs = getUserInfo(event.source.user_id)
             last_image = docs['image just uploaded']
-            doc_ref = db.collection(event.source.user_id).document(last_image)
+            doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
             doc_ref.set({"category": msg_from_user})
 
             message = "已將此物品歸類至「" + msg_from_user + "」"
@@ -151,7 +151,6 @@ def handle_img_message(event):
         import os
         os.remove(temp_file_path)
         
-
         docs = getUserInfo(event.source.user_id)
         docs['image just uploaded'] = file_name
         setUserInfo(event.source.user_id, docs)
