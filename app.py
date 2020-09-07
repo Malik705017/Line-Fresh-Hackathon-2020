@@ -117,8 +117,14 @@ def handle_message(event):
     
     msg_to_user = ""
     message = ""
+    items = ["化妝保養品","生鮮食材","冷凍料理","零食甜點","料理用品","保健食品","醫療藥用品"]
+    match = False
+    for item in items:
+      if(msg_from_user == item):
+        match = True
+        break
 
-    if(msg_from_user == "化妝保養品" or msg_from_user == "生鮮食材" or msg_from_user == "零食甜點" or msg_from_user == "醫療藥用品"):
+    if(match == True):
         if(getUserStatus(event.source.user_id) == "Image Uploaded Successfully"):
             docs = getUserInfo(event.source.user_id)
             last_image = docs['image just uploaded']
@@ -186,7 +192,7 @@ def handle_img_message(event):
         "paddingAll": "0px"
       }
     },
-    {
+        {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -196,7 +202,7 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
-            "action": {
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
               "text": "生鮮食材"
@@ -210,7 +216,7 @@ def handle_img_message(event):
         "paddingAll": "0px"
       }
     },
-    {
+        {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -220,7 +226,31 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
-            "action": {
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
+              "type": "message",
+              "label": "action",
+              "text": "冷凍料理"
+            },
+            "aspectMode": "cover",
+            "aspectRatio": "7.65:10",
+            "gravity": "top",
+            "url": "https://i.imgur.com/hO3hYW8.png"
+          }
+        ],
+        "paddingAll": "0px"
+      }
+    },
+        {
+      "type": "bubble",
+      "size": "micro",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "image",
+            "size": "full",
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
               "label": "action",
               "text": "零食甜點"
@@ -234,7 +264,7 @@ def handle_img_message(event):
         "paddingAll": "0px"
       }
     },
-    {
+        {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -244,56 +274,8 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
-             "action": {
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
               "type": "message",
-              "label": "action",
-              "text": "醫療藥用品"
-            },
-            "aspectMode": "cover",
-            "aspectRatio": "7.65:10",
-            "gravity": "top",
-            "url": "https://i.imgur.com/seM9Ff3.png"
-          }
-        ],
-        "paddingAll": "0px"
-      }
-    },
-    {
-      "type": "bubble",
-      "size": "micro",
-      "body": {
-        "type": "box",
-        "layout": "vertical",
-        "contents": [
-          {
-            "type": "image",
-            "size": "full",
-            "action": {
-              "type": "message",
-              "label": "action",
-              "text": "冷凍料理"
-            },
-            "aspectMode": "cover",
-            "aspectRatio": "7.65:10",
-            "gravity": "top",
-            "url": "https://i.imgur.com/hO3hYW8.png"
-          }
-        ],
-        "paddingAll": "0px"
-      }
-    },
-    {
-      "type": "bubble",
-      "size": "micro",
-      "body": {
-        "type": "box",
-        "layout": "vertical",
-        "contents": [
-          {
-            "type": "image",
-            "size": "full",
-            "action": {
-              "type": "message",
               "label": "action",
               "text": "料理用品"
             },
@@ -306,7 +288,7 @@ def handle_img_message(event):
         "paddingAll": "0px"
       }
     },
-    {
+        {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -316,8 +298,8 @@ def handle_img_message(event):
           {
             "type": "image",
             "size": "full",
-            "action": {
-              "type": "message",
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
+              "type": "message",
               "label": "action",
               "text": "保健食品"
             },
@@ -325,6 +307,30 @@ def handle_img_message(event):
             "aspectRatio": "7.65:10",
             "gravity": "top",
             "url": "https://i.imgur.com/karOgVl.png"
+          }
+        ],
+        "paddingAll": "0px"
+      }
+    },
+        {
+      "type": "bubble",
+      "size": "micro",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "image",
+            "size": "full",
+            "action": {      #action定義點下去之後要做什麼動作，這邊是設定message action
+              "type": "message",
+              "label": "action",
+              "text": "醫療藥用品"
+            },
+            "aspectMode": "cover",
+            "aspectRatio": "7.65:10",
+            "gravity": "top",
+            "url": "https://i.imgur.com/seM9Ff3.png"
           }
         ],
         "paddingAll": "0px"
