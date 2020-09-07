@@ -76,7 +76,7 @@ def sendDefaultMessage(reply_token, text=""):
     line_bot_api.reply_message(reply_token, message)
 
 def initUserInfo(user_id):
-    doc_ref = db.collection(user_id).document('User Info')
+    doc_ref = db.collection('users').document(user_id)
 
     doc_ref.set({"status": "Standby"})
 
