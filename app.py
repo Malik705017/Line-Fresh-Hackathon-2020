@@ -113,7 +113,7 @@ def handle_postback(event):
         last_image = docs['image just uploaded']
         doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
         docs = doc_ref.get().to_dict()
-        docs['expire_date'] = event.postback.params.date
+        docs['expire_date'] = event.postback.params['date']
         doc_ref.set(docs)
         setUserStatus(event.source.user_id, "Standby")
         sendDefaultMessage(event.reply_token)
