@@ -124,17 +124,27 @@ def handle_message(event):
         match = True
         break
 
-    if(match == True):
-        if(getUserStatus(event.source.user_id) == "Image Uploaded Successfully"):
+    if(getUserStatus(event.source.user_id) == "wait_for_select_category"):
+        if(match == True):
             docs = getUserInfo(event.source.user_id)
             last_image = docs['image just uploaded']
             doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
             doc_ref.set({"category": msg_from_user, "file": last_image})
 
-            message = "已將此物品歸類至「" + msg_from_user + "」"
-            sendDefaultMessage(event.reply_token, message)
-            setUserStatus(event.source.user_id, "Standby")
-
+            msg_to_user = "已將此物品歸類至「" + msg_from_user + "」，請告訴我有效日期。"
+            message = TextSendMessage(text=msg_to_user, quick_reply=QuickReply(items=[
+                                QuickReplyButton(action=DatetimePickerAction(label="選擇日期", mode="date"))
+                            ]))
+            line_bot_api.reply_message(event.reply_token, message)
+            setUserStatus(event.source.user_id, "wait_for_expire_date")
+    elif(getUserStatus(event.source.user_id) == "wait_for_expire_date"):
+        docs = getUserInfo(event.source.user_id)
+        last_image = docs['image just uploaded']
+        doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
+        docs = doc_ref.get().to_dict()
+        docs['expire_date'] = msg_from_user
+        doc_ref.set(docs)
+        setUserStatus(event.source.user_id, "Standby")
     
 # 處理圖片訊息（接收到圖片訊息時啟動）
 @handler.add(MessageEvent, message=ImageMessage)
@@ -161,7 +171,7 @@ def handle_img_message(event):
         docs['image just uploaded'] = file_name
         setUserInfo(event.source.user_id, docs)
 
-        setUserStatus(event.source.user_id, "Image Uploaded Successfully")
+        setUserStatus(event.source.user_id, "wait_for_select_category")
 
 
     #contents = (寫好的json檔案)
