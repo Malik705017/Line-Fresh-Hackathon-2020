@@ -149,6 +149,10 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token, message)
             setUserStatus(event.source.user_id, "wait_for_expire_date")
     
+    elif(msg_from_user == "記錄品項"):
+        sendDefaultMessage(event.reply_token)
+    
+    
 # 處理圖片訊息（接收到圖片訊息時啟動）
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_img_message(event):
