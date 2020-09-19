@@ -155,368 +155,171 @@ def handle_message(event):
 
     elif(msg_from_user == "提醒我"):
         content = {
-  "type": "carousel",
-  "contents": [
-    {
-      "type": "bubble",
-      "size": "kilo",
-      "body": {
-        "type": "box",
-        "layout": "vertical",
-        "contents": [
-          {
-            "type": "image",
-            "url": "https://i.imgur.com/Zn1Pwbf.jpg",
-            "size": "full",
-            "aspectMode": "cover",
-            "aspectRatio": "2:3",
-            "gravity": "top"
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
+          "type": "carousel",
+          "contents": [
+            {
+              "type": "bubble",
+              "hero": {
+                "type": "image",
+                "size": "full",
+                "aspectRatio": "20:13",
+                "aspectMode": "cover",
+                "url": "https://i.imgur.com/Zn1Pwbf.jpg"
+              },
+              "body": {
                 "type": "box",
                 "layout": "vertical",
-                "contents": [
-                  {
-                    "type": "text",
-                    "text": "蛋糕",
-                    "size": "xl",
-                    "color": "#000000",
-                    "weight": "bold"
-                  }
-                ]
-              },
-              {
-                "type": "box",
-                "layout": "baseline",
+                "spacing": "sm",
                 "contents": [
                   {
                     "type": "text",
                     "text": "零食甜點",
-                    "color": "#000000",
-                    "size": "sm",
-                    "flex": 0
+                    "wrap": true,
+                    "weight": "bold",
+                    "size": "xl"
+                  },
+                  {
+                    "type": "box",
+                    "layout": "baseline",
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "2020-09-20",
+                        "wrap": true,
+                        "weight": "bold",
+                        "size": "xl",
+                        "flex": 0
+                      }
+                    ]
                   },
                   {
                     "type": "text",
-                    "text": "過期日：2020/9/20",
-                    "color": "#000000",
-                    "decoration": "none",
-                    "gravity": "bottom",
+                    "text": "即將到期！",
+                    "wrap": true,
+                    "size": "md",
+                    "margin": "md",
+                    "color": "#ff5551",
                     "flex": 0,
-                    "size": "sm"
-                  }
-                ],
-                "spacing": "lg",
-                "margin": "none"
-              },
-              {
-                "type": "box",
-                "layout": "horizontal",
-                "contents": [
-                  {
-                    "type": "box",
-                    "layout": "vertical",
-                    "contents": [
-                      {
-                        "type": "filler"
-                      },
-                      {
-                        "type": "box",
-                        "layout": "baseline",
-                        "contents": [
-                          {
-                            "type": "filler"
-                          },
-                          {
-                            "type": "text",
-                            "text": "已使用完畢",
-                            "color": "#000000",
-                            "flex": 0,
-                            "offsetTop": "-2px",
-                            "offsetStart": "-1.5px"
-                          },
-                          {
-                            "type": "filler"
-                          }
-                        ],
-                        "spacing": "sm"
-                      },
-                      {
-                        "type": "filler"
-                      }
-                    ],
-                    "borderWidth": "1px",
-                    "cornerRadius": "4px",
-                    "spacing": "sm",
-                    "borderColor": "#000000",
-                    "margin": "xxl",
-                    "height": "40px",
-                    "backgroundColor": "#66e986",
-                    "width": "100px"
-                  },
-                  {
-                    "type": "box",
-                    "layout": "vertical",
-                    "contents": [
-                      {
-                        "type": "filler"
-                      },
-                      {
-                        "type": "box",
-                        "layout": "baseline",
-                        "contents": [
-                          {
-                            "type": "filler"
-                          },
-                          {
-                            "type": "text",
-                            "text": "一週後提醒",
-                            "color": "#000000",
-                            "flex": 0,
-                            "offsetTop": "-2px",
-                            "offsetStart": "-1.5px"
-                          },
-                          {
-                            "type": "filler"
-                          }
-                        ],
-                        "spacing": "sm"
-                      },
-                      {
-                        "type": "filler"
-                      }
-                    ],
-                    "borderWidth": "1px",
-                    "cornerRadius": "4px",
-                    "spacing": "sm",
-                    "borderColor": "#000000",
-                    "margin": "xxl",
-                    "height": "40px",
-                    "backgroundColor": "#66e986",
-                    "width": "100px"
-                  }
-                ],
-                "offsetTop": "8px"
-              }
-            ],
-            "position": "absolute",
-            "offsetBottom": "0px",
-            "offsetStart": "0px",
-            "offsetEnd": "0px",
-            "backgroundColor": "#c6ffd4",
-            "paddingAll": "20px",
-            "paddingTop": "18px"
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "即將到期！",
-                "color": "#ffffff",
-                "align": "center",
-                "size": "xs",
-                "offsetTop": "3px"
-              }
-            ],
-            "position": "absolute",
-            "cornerRadius": "20px",
-            "offsetTop": "18px",
-            "backgroundColor": "#48cc7b",
-            "offsetStart": "18px",
-            "height": "25px",
-            "width": "100px"
-          }
-        ],
-        "paddingAll": "0px"
-      }
-    },
-    {
-      "type": "bubble",
-      "size": "kilo",
-      "body": {
-        "type": "box",
-        "layout": "vertical",
-        "contents": [
-          {
-            "type": "image",
-            "url": "https://i.imgur.com/oMXyQNP.jpg",
-            "size": "full",
-            "aspectMode": "cover",
-            "aspectRatio": "2:3",
-            "gravity": "top"
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "box",
-                "layout": "vertical",
-                "contents": [
-                  {
-                    "type": "text",
-                    "text": "牛奶",
-                    "size": "xl",
-                    "color": "#000000",
                     "weight": "bold"
                   }
                 ]
               },
-              {
+              "footer": {
                 "type": "box",
-                "layout": "baseline",
+                "layout": "vertical",
+                "spacing": "sm",
+                "contents": [
+                  {
+                    "type": "button",
+                    "style": "primary",
+                    "action": {
+                      "type": "message",
+                      "label": "已使用完畢",
+                      "text": "done"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "action": {
+                      "type": "message",
+                      "label": "一週後提醒我",
+                      "text": "一週後"
+                    }
+                  }
+                ]
+              },
+              "styles": {
+                "body": {
+                  "backgroundColor": "#D3FFEC"
+                },
+                "footer": {
+                  "backgroundColor": "#D3FFEC"
+                }
+              }
+            },
+            {
+              "type": "bubble",
+              "hero": {
+                "type": "image",
+                "size": "full",
+                "aspectRatio": "20:13",
+                "aspectMode": "cover",
+                "url": "https://i.imgur.com/oMXyQNP.jpg"
+              },
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "sm",
                 "contents": [
                   {
                     "type": "text",
                     "text": "生鮮食材",
-                    "color": "#000000",
-                    "size": "sm",
-                    "flex": 0
+                    "wrap": true,
+                    "weight": "bold",
+                    "size": "xl"
+                  },
+                  {
+                    "type": "box",
+                    "layout": "baseline",
+                    "flex": 1,
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "2020-09-26",
+                        "wrap": true,
+                        "weight": "bold",
+                        "size": "xl",
+                        "flex": 0
+                      }
+                    ]
                   },
                   {
                     "type": "text",
-                    "text": "過期日：2020/9/26",
-                    "color": "#000000",
-                    "decoration": "none",
-                    "gravity": "bottom",
+                    "text": "即將到期！",
+                    "wrap": true,
+                    "size": "md",
+                    "margin": "md",
+                    "color": "#ff5551",
                     "flex": 0,
-                    "size": "sm"
+                    "weight": "bold"
                   }
-                ],
-                "spacing": "lg",
-                "margin": "none"
+                ]
               },
-              {
+              "footer": {
                 "type": "box",
-                "layout": "horizontal",
+                "layout": "vertical",
+                "spacing": "sm",
                 "contents": [
                   {
-                    "type": "box",
-                    "layout": "vertical",
-                    "contents": [
-                      {
-                        "type": "filler"
-                      },
-                      {
-                        "type": "box",
-                        "layout": "baseline",
-                        "contents": [
-                          {
-                            "type": "filler"
-                          },
-                          {
-                            "type": "text",
-                            "text": "已使用完畢",
-                            "color": "#000000",
-                            "flex": 0,
-                            "offsetTop": "-2px",
-                            "offsetStart": "-1.5px"
-                          },
-                          {
-                            "type": "filler"
-                          }
-                        ],
-                        "spacing": "sm"
-                      },
-                      {
-                        "type": "filler"
-                      }
-                    ],
-                    "borderWidth": "1px",
-                    "cornerRadius": "4px",
-                    "spacing": "sm",
-                    "borderColor": "#000000",
-                    "margin": "xxl",
-                    "height": "40px",
-                    "backgroundColor": "#66e986",
-                    "width": "100px"
+                    "type": "button",
+                    "style": "primary",
+                    "action": {
+                      "type": "message",
+                      "label": "已使用完畢",
+                      "text": "done"
+                    }
                   },
                   {
-                    "type": "box",
-                    "layout": "vertical",
-                    "contents": [
-                      {
-                        "type": "filler"
-                      },
-                      {
-                        "type": "box",
-                        "layout": "baseline",
-                        "contents": [
-                          {
-                            "type": "filler"
-                          },
-                          {
-                            "type": "text",
-                            "text": "一週後提醒",
-                            "color": "#000000",
-                            "flex": 0,
-                            "offsetTop": "-2px",
-                            "offsetStart": "-1.5px"
-                          },
-                          {
-                            "type": "filler"
-                          }
-                        ],
-                        "spacing": "sm"
-                      },
-                      {
-                        "type": "filler"
-                      }
-                    ],
-                    "borderWidth": "1px",
-                    "cornerRadius": "4px",
-                    "spacing": "sm",
-                    "borderColor": "#000000",
-                    "margin": "xxl",
-                    "height": "40px",
-                    "backgroundColor": "#66e986",
-                    "width": "100px"
+                    "type": "button",
+                    "action": {
+                      "type": "message",
+                      "label": "一週後提醒我",
+                      "text": "一週後"
+                    }
                   }
-                ],
-                "offsetTop": "8px"
+                ]
+              },
+              "styles": {
+                "body": {
+                  "backgroundColor": "#D3FFEC"
+                },
+                "footer": {
+                  "backgroundColor": "#D3FFEC"
+                }
               }
-            ],
-            "position": "absolute",
-            "offsetBottom": "0px",
-            "offsetStart": "0px",
-            "offsetEnd": "0px",
-            "backgroundColor": "#c6ffd4",
-            "paddingAll": "20px",
-            "paddingTop": "18px"
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "即將到期！",
-                "color": "#ffffff",
-                "align": "center",
-                "size": "xs",
-                "offsetTop": "3px"
-              }
-            ],
-            "position": "absolute",
-            "cornerRadius": "20px",
-            "offsetTop": "18px",
-            "backgroundColor": "#48cc7b",
-            "offsetStart": "18px",
-            "height": "25px",
-            "width": "100px"
-          }
-        ],
-        "paddingAll": "0px"
-      }
-    }
-  ]
-}
+            }
+          ]
+        }
         message = FlexSendMessage(
             alt_text = "flex message",
             contents = content
