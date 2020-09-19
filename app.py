@@ -174,7 +174,7 @@ def handle_message(event):
                   {
                     "type": "text",
                     "text": "零食甜點",
-                    "wrap": true,
+                    "wrap": True,
                     "weight": "bold",
                     "size": "xl"
                   },
@@ -185,7 +185,7 @@ def handle_message(event):
                       {
                         "type": "text",
                         "text": "2020-09-20",
-                        "wrap": true,
+                        "wrap": True,
                         "weight": "bold",
                         "size": "xl",
                         "flex": 0
@@ -195,7 +195,7 @@ def handle_message(event):
                   {
                     "type": "text",
                     "text": "即將到期！",
-                    "wrap": true,
+                    "wrap": True,
                     "size": "md",
                     "margin": "md",
                     "color": "#ff5551",
@@ -254,7 +254,7 @@ def handle_message(event):
                   {
                     "type": "text",
                     "text": "生鮮食材",
-                    "wrap": true,
+                    "wrap": True,
                     "weight": "bold",
                     "size": "xl"
                   },
@@ -266,7 +266,7 @@ def handle_message(event):
                       {
                         "type": "text",
                         "text": "2020-09-26",
-                        "wrap": true,
+                        "wrap": True,
                         "weight": "bold",
                         "size": "xl",
                         "flex": 0
@@ -276,7 +276,7 @@ def handle_message(event):
                   {
                     "type": "text",
                     "text": "即將到期！",
-                    "wrap": true,
+                    "wrap": True,
                     "size": "md",
                     "margin": "md",
                     "color": "#ff5551",
