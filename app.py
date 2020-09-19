@@ -103,7 +103,8 @@ def getUserStatus(user_id):
 @handler.add(FollowEvent)
 def handle_follow(event):
     initUserInfo(event.source.user_id)
-    sendDefaultMessage(event.reply_token)
+    text = "哈囉～！歡迎使用滴答提醒。\n我可以幫助您記錄容易過期或忘記使用的產品並適時提醒您。您可以使用選單中的「紀錄品項」可以上傳照片，接著只要輸入日期就能成功紀錄。\n如果您需要查看紀錄的產品，請點選「查看品項」。"
+    sendDefaultMessage(event.reply_token, text)
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
@@ -151,6 +152,272 @@ def handle_message(event):
     
     elif(msg_from_user == "記錄品項"):
         sendDefaultMessage(event.reply_token)
+
+    elif(msg_from_user == "提醒我"):
+        content = {
+          "type": "carousel",
+          "contents": [
+            {
+              "type": "bubble",
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "image",
+                    "url": "https://i.imgur.com/8amUycL.jpg",
+                    "size": "full",
+                    "aspectMode": "cover",
+                    "aspectRatio": "2:3",
+                    "gravity": "top"
+                  },
+                  {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                      {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                          {
+                            "type": "text",
+                            "text": "維生素B群",
+                            "size": "xl",
+                            "color": "#000000",
+                            "weight": "bold"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "box",
+                        "layout": "baseline",
+                        "contents": [
+                          {
+                            "type": "text",
+                            "text": "保健食品",
+                            "color": "#000000",
+                            "size": "md",
+                            "flex": 0
+                          },
+                          {
+                            "type": "text",
+                            "text": "過期日：2022/03/12",
+                            "color": "#000000",
+                            "decoration": "none",
+                            "gravity": "bottom",
+                            "flex": 0,
+                            "size": "md"
+                          }
+                        ],
+                        "spacing": "lg"
+                      },
+                      {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                          {
+                            "type": "filler"
+                          },
+                          {
+                            "type": "box",
+                            "layout": "baseline",
+                            "contents": [
+                              {
+                                "type": "filler"
+                              },
+                              {
+                                "type": "text",
+                                "text": "已使用完畢",
+                                "color": "#000000",
+                                "flex": 0,
+                                "offsetTop": "-2px"
+                              },
+                              {
+                                "type": "filler"
+                              }
+                            ],
+                            "spacing": "sm"
+                          },
+                          {
+                            "type": "filler"
+                          }
+                        ],
+                        "borderWidth": "1px",
+                        "cornerRadius": "4px",
+                        "spacing": "sm",
+                        "borderColor": "#000000",
+                        "margin": "xxl",
+                        "height": "40px"
+                      }
+                    ],
+                    "position": "absolute",
+                    "offsetBottom": "0px",
+                    "offsetStart": "0px",
+                    "offsetEnd": "0px",
+                    "backgroundColor": "#ffffff",
+                    "paddingAll": "20px",
+                    "paddingTop": "18px"
+                  },
+                  {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "即將到期！",
+                        "color": "#ffffff",
+                        "align": "center",
+                        "size": "xs",
+                        "offsetTop": "3px"
+                      }
+                    ],
+                    "position": "absolute",
+                    "cornerRadius": "20px",
+                    "offsetTop": "18px",
+                    "backgroundColor": "#ff334b",
+                    "offsetStart": "18px",
+                    "height": "25px",
+                    "width": "100px"
+                  }
+                ],
+                "paddingAll": "0px"
+              }
+            },
+            {
+              "type": "bubble",
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "image",
+                    "url": "https://i.imgur.com/7fIga2O.jpg",
+                    "size": "full",
+                    "aspectMode": "cover",
+                    "aspectRatio": "2:3",
+                    "gravity": "top"
+                  },
+                  {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                      {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                          {
+                            "type": "text",
+                            "text": "維生素C",
+                            "size": "xl",
+                            "color": "#000000",
+                            "weight": "bold"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "box",
+                        "layout": "baseline",
+                        "contents": [
+                          {
+                            "type": "text",
+                            "text": "保健食品",
+                            "color": "#000000",
+                            "size": "md",
+                            "flex": 0
+                          },
+                          {
+                            "type": "text",
+                            "text": "過期日：2021/12",
+                            "color": "#000000",
+                            "decoration": "none",
+                            "gravity": "bottom",
+                            "flex": 0,
+                            "size": "md"
+                          }
+                        ],
+                        "spacing": "lg"
+                      },
+                      {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                          {
+                            "type": "filler"
+                          },
+                          {
+                            "type": "box",
+                            "layout": "baseline",
+                            "contents": [
+                              {
+                                "type": "filler"
+                              },
+                              {
+                                "type": "text",
+                                "text": "已使用完畢",
+                                "color": "#000000",
+                                "flex": 0,
+                                "offsetTop": "-2px"
+                              },
+                              {
+                                "type": "filler"
+                              }
+                            ],
+                            "spacing": "sm"
+                          },
+                          {
+                            "type": "filler"
+                          }
+                        ],
+                        "borderWidth": "1px",
+                        "cornerRadius": "4px",
+                        "spacing": "sm",
+                        "borderColor": "#000000",
+                        "margin": "xxl",
+                        "height": "40px"
+                      }
+                    ],
+                    "position": "absolute",
+                    "offsetBottom": "0px",
+                    "offsetStart": "0px",
+                    "offsetEnd": "0px",
+                    "backgroundColor": "#ffffff",
+                    "paddingAll": "20px",
+                    "paddingTop": "18px"
+                  },
+                  {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                      {
+                        "type": "text",
+                        "text": "即將到期！",
+                        "color": "#ffffff",
+                        "align": "center",
+                        "size": "xs",
+                        "offsetTop": "3px"
+                      }
+                    ],
+                    "position": "absolute",
+                    "cornerRadius": "20px",
+                    "offsetTop": "18px",
+                    "backgroundColor": "#ff334b",
+                    "offsetStart": "18px",
+                    "height": "25px",
+                    "width": "100px"
+                  }
+                ],
+                "paddingAll": "0px"
+              }
+            }
+          ]
+        }
+        message = FlexSendMessage(
+            alt_text = "flex message",
+            contents = content
+            ) 
+    
+        line_bot_api.reply_message(event.reply_token, message)
+
     
     
 # 處理圖片訊息（接收到圖片訊息時啟動）
