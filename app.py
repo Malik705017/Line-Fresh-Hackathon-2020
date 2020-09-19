@@ -159,6 +159,7 @@ def handle_message(event):
           "contents": [
             {
               "type": "bubble",
+              "size": "micro",
               "hero": {
                 "type": "image",
                 "size": "full",
@@ -176,7 +177,7 @@ def handle_message(event):
                     "text": "零食甜點",
                     "wrap": True,
                     "weight": "bold",
-                    "size": "xl"
+                    "size": "md"
                   },
                   {
                     "type": "box",
@@ -187,7 +188,7 @@ def handle_message(event):
                         "text": "2020-09-20",
                         "wrap": True,
                         "weight": "bold",
-                        "size": "xl",
+                        "size": "md",
                         "flex": 0
                       }
                     ]
@@ -196,7 +197,7 @@ def handle_message(event):
                     "type": "text",
                     "text": "即將到期！",
                     "wrap": True,
-                    "size": "md",
+                    "size": "sm",
                     "margin": "md",
                     "color": "#ff5551",
                     "flex": 0,
@@ -216,7 +217,8 @@ def handle_message(event):
                       "type": "message",
                       "label": "已使用完畢",
                       "text": "done"
-                    }
+                    },
+                    "height": "sm"
                   },
                   {
                     "type": "button",
@@ -224,7 +226,8 @@ def handle_message(event):
                       "type": "message",
                       "label": "一週後提醒我",
                       "text": "一週後"
-                    }
+                    },
+                    "height": "sm"
                   }
                 ]
               },
@@ -239,6 +242,7 @@ def handle_message(event):
             },
             {
               "type": "bubble",
+              "size": "micro",
               "hero": {
                 "type": "image",
                 "size": "full",
@@ -256,7 +260,7 @@ def handle_message(event):
                     "text": "生鮮食材",
                     "wrap": True,
                     "weight": "bold",
-                    "size": "xl"
+                    "size": "md"
                   },
                   {
                     "type": "box",
@@ -268,7 +272,7 @@ def handle_message(event):
                         "text": "2020-09-26",
                         "wrap": True,
                         "weight": "bold",
-                        "size": "xl",
+                        "size": "md",
                         "flex": 0
                       }
                     ]
@@ -277,7 +281,7 @@ def handle_message(event):
                     "type": "text",
                     "text": "即將到期！",
                     "wrap": True,
-                    "size": "md",
+                    "size": "sm",
                     "margin": "md",
                     "color": "#ff5551",
                     "flex": 0,
@@ -297,7 +301,8 @@ def handle_message(event):
                       "type": "message",
                       "label": "已使用完畢",
                       "text": "done"
-                    }
+                    },
+                    "height": "sm"
                   },
                   {
                     "type": "button",
@@ -305,7 +310,8 @@ def handle_message(event):
                       "type": "message",
                       "label": "一週後提醒我",
                       "text": "一週後"
-                    }
+                    },
+                    "height": "sm"
                   }
                 ]
               },
