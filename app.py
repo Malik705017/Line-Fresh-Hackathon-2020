@@ -210,46 +210,97 @@ def handle_message(event):
                     "size": "sm"
                   }
                 ],
-                "spacing": "lg"
+                "spacing": "lg",
+                "margin": "none"
               },
               {
                 "type": "box",
-                "layout": "vertical",
+                "layout": "horizontal",
                 "contents": [
                   {
-                    "type": "filler"
-                  },
-                  {
                     "type": "box",
-                    "layout": "baseline",
+                    "layout": "vertical",
                     "contents": [
                       {
                         "type": "filler"
                       },
                       {
-                        "type": "text",
-                        "text": "已使用完畢",
-                        "color": "#000000",
-                        "flex": 0,
-                        "offsetTop": "-2px"
+                        "type": "box",
+                        "layout": "baseline",
+                        "contents": [
+                          {
+                            "type": "filler"
+                          },
+                          {
+                            "type": "text",
+                            "text": "已使用完畢",
+                            "color": "#000000",
+                            "flex": 0,
+                            "offsetTop": "-2px",
+                            "offsetStart": "-1.5px"
+                          },
+                          {
+                            "type": "filler"
+                          }
+                        ],
+                        "spacing": "sm"
                       },
                       {
                         "type": "filler"
                       }
                     ],
-                    "spacing": "sm"
+                    "borderWidth": "1px",
+                    "cornerRadius": "4px",
+                    "spacing": "sm",
+                    "borderColor": "#000000",
+                    "margin": "xxl",
+                    "height": "40px",
+                    "backgroundColor": "#66e986",
+                    "width": "100px"
                   },
                   {
-                    "type": "filler"
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                      {
+                        "type": "filler"
+                      },
+                      {
+                        "type": "box",
+                        "layout": "baseline",
+                        "contents": [
+                          {
+                            "type": "filler"
+                          },
+                          {
+                            "type": "text",
+                            "text": "一週後提醒",
+                            "color": "#000000",
+                            "flex": 0,
+                            "offsetTop": "-2px",
+                            "offsetStart": "-1.5px"
+                          },
+                          {
+                            "type": "filler"
+                          }
+                        ],
+                        "spacing": "sm"
+                      },
+                      {
+                        "type": "filler"
+                      }
+                    ],
+                    "borderWidth": "1px",
+                    "cornerRadius": "4px",
+                    "spacing": "sm",
+                    "borderColor": "#000000",
+                    "margin": "xxl",
+                    "height": "40px",
+                    "backgroundColor": "#66e986",
+                    "width": "100px"
                   }
                 ],
-                "borderWidth": "1px",
-                "cornerRadius": "4px",
-                "spacing": "sm",
-                "borderColor": "#000000",
-                "margin": "xxl",
-                "height": "40px",
-                "backgroundColor": "#66e986"
+                "offsetTop": "8px"
               }
             ],
             "position": "absolute",
@@ -323,10 +374,10 @@ def handle_message(event):
                 "contents": [
                   {
                     "type": "text",
+                    "text": "生鮮食材",
                     "color": "#000000",
                     "size": "sm",
-                    "flex": 0,
-                    "text": "生鮮食材"
+                    "flex": 0
                   },
                   {
                     "type": "text",
@@ -338,46 +389,97 @@ def handle_message(event):
                     "size": "sm"
                   }
                 ],
-                "spacing": "lg"
+                "spacing": "lg",
+                "margin": "none"
               },
               {
                 "type": "box",
-                "layout": "vertical",
+                "layout": "horizontal",
                 "contents": [
                   {
-                    "type": "filler"
-                  },
-                  {
                     "type": "box",
-                    "layout": "baseline",
+                    "layout": "vertical",
                     "contents": [
                       {
                         "type": "filler"
                       },
                       {
-                        "type": "text",
-                        "text": "已使用完畢",
-                        "color": "#000000",
-                        "flex": 0,
-                        "offsetTop": "-2px"
+                        "type": "box",
+                        "layout": "baseline",
+                        "contents": [
+                          {
+                            "type": "filler"
+                          },
+                          {
+                            "type": "text",
+                            "text": "已使用完畢",
+                            "color": "#000000",
+                            "flex": 0,
+                            "offsetTop": "-2px",
+                            "offsetStart": "-1.5px"
+                          },
+                          {
+                            "type": "filler"
+                          }
+                        ],
+                        "spacing": "sm"
                       },
                       {
                         "type": "filler"
                       }
                     ],
-                    "spacing": "sm"
+                    "borderWidth": "1px",
+                    "cornerRadius": "4px",
+                    "spacing": "sm",
+                    "borderColor": "#000000",
+                    "margin": "xxl",
+                    "height": "40px",
+                    "backgroundColor": "#66e986",
+                    "width": "100px"
                   },
                   {
-                    "type": "filler"
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                      {
+                        "type": "filler"
+                      },
+                      {
+                        "type": "box",
+                        "layout": "baseline",
+                        "contents": [
+                          {
+                            "type": "filler"
+                          },
+                          {
+                            "type": "text",
+                            "text": "一週後提醒",
+                            "color": "#000000",
+                            "flex": 0,
+                            "offsetTop": "-2px",
+                            "offsetStart": "-1.5px"
+                          },
+                          {
+                            "type": "filler"
+                          }
+                        ],
+                        "spacing": "sm"
+                      },
+                      {
+                        "type": "filler"
+                      }
+                    ],
+                    "borderWidth": "1px",
+                    "cornerRadius": "4px",
+                    "spacing": "sm",
+                    "borderColor": "#000000",
+                    "margin": "xxl",
+                    "height": "40px",
+                    "backgroundColor": "#66e986",
+                    "width": "100px"
                   }
                 ],
-                "borderWidth": "1px",
-                "cornerRadius": "4px",
-                "spacing": "sm",
-                "borderColor": "#000000",
-                "margin": "xxl",
-                "height": "40px",
-                "backgroundColor": "#66e986"
+                "offsetTop": "8px"
               }
             ],
             "position": "absolute",
