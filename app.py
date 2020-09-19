@@ -320,6 +320,7 @@ def handle_message(event):
             }
           ]
         }
+
         message = FlexSendMessage(
             alt_text = "flex message",
             contents = content
