@@ -103,7 +103,7 @@ def getUserStatus(user_id):
 @handler.add(FollowEvent)
 def handle_follow(event):
     initUserInfo(event.source.user_id)
-    text = "哈囉～！歡迎使用滴答提醒。\n我可以幫助您記錄容易過期或忘記使用的產品並適時提醒您。您可以使用選單中的「紀錄品項」可以上傳照片，接著只要輸入日期就能成功紀錄。\n如果您需要查看紀錄的產品，請點選「查看品項」。"
+    text = "哈囉～！歡迎使用滴答提醒。\n我可以幫助您記錄容易過期或忘記使用的產品並適時提醒您。\n您可以使用選單中的「紀錄品項」可以上傳照片，接著只要輸入日期就能成功紀錄。\n如果您需要查看紀錄的產品與過期日，請點選「查看品項」。"
     sendDefaultMessage(event.reply_token, text)
 
 @handler.add(PostbackEvent)
