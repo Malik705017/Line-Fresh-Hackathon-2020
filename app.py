@@ -216,7 +216,7 @@ def handle_message(event):
                 {
                   "type": "box",
                   "layout": "horizontal",
-                  "offsetStart": "-10px",
+                  "offsetStart": "-100px",
                   "contents": [
                     {
                       "type": "box",
@@ -400,7 +400,7 @@ def handle_message(event):
                     {
                       "type": "box",
                       "layout": "vertical",
-                      "offsetStart": "-10px",
+                      "offsetStart": "-100px",
                       "contents": [
                         {
                           "type": "filler"
