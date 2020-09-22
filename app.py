@@ -205,10 +205,12 @@ def generateJson(imgList):
             }
       
       aCard['hero']['url'] = url
-      aCard['body']['contents'][0]['text'] = category + url
+      aCard['body']['contents'][0]['text'] = category
       aCard['body']['contents'][1]['contents'][0]['text'] = expire_date
       
       jsonContent['contents'].append(aCard)
+
+      print(url)
 
     return jsonContent
       
