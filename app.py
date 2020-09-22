@@ -107,10 +107,12 @@ def getUserImageList(user_id):
               }] #回傳圖片名稱
 
 def generateJson(imgList):
+
     jsonContent = {
           "type": "carousel",
           "contents": []
         }
+
     for item in imgList:
       blob = bucket.blob(item['file'])
       category = item['category']
@@ -201,6 +203,7 @@ def generateJson(imgList):
                 }
               }
             }
+      
       aCard['hero']['url'] = url
       aCard['body']['contents'][0]['text'] = category
       aCard['body']['contents'][1]['contents'][0]['text'] = expire_date
@@ -268,7 +271,7 @@ def handle_message(event):
 
     elif(msg_from_user == "提醒我"):
         imglist = getUserImageList(userID)
-        content = generateJson(imgList)
+        content = generateJson(imglist)
 
         message = FlexSendMessage(
             alt_text = "flex message",
