@@ -37,7 +37,7 @@ bucket = storage.bucket()
 # -------------------------------連接Firebase資料庫 end-------------------------------- #
 
 # --------------------------------引用其他套件 start------------------------------------ #
-
+import datetime 
 # ---------------------------------引用其他套件 end------------------------------------- #
 
 
@@ -99,65 +99,26 @@ def getUserStatus(user_id):
     docs = getUserInfo(user_id)
     return docs['status']
 
-# 問候訊息
-@handler.add(FollowEvent)
-def handle_follow(event):
-    initUserInfo(event.source.user_id)
-    text = "哈囉～！歡迎使用滴答提醒。\n\n我可以幫助您記錄容易過期或忘記使用的產品並適時提醒您。\n\n您可以使用選單中的「紀錄品項」可以上傳照片，接著只要輸入日期就能成功紀錄。\n如果您需要查看紀錄的產品與過期日，請點選「查看品項」。"
-    sendDefaultMessage(event.reply_token, text)
+def getUserImageList(user_id):
 
-@handler.add(PostbackEvent)
-def handle_postback(event):
-    if (getUserStatus(event.source.user_id) == "wait_for_expire_date"):
-        docs = getUserInfo(event.source.user_id)
-        last_image = docs['image just uploaded']
-        doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
-        docs = doc_ref.get().to_dict()
-        docs['expire_date'] = event.postback.params['date']
-        doc_ref.set(docs)
-        setUserStatus(event.source.user_id, "Standby")
-        sendDefaultMessage(event.reply_token, "有效日期為「"+event.postback.params['date']+"」，我會在到期前提醒你ㄉ")
+    return [{ "category" : "保健食品",
+             "expire_date" : "2022-03-12",
+             "file" : "1600489971207.jpg"
+              }] #回傳圖片名稱
 
-# 處理訊息
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-   
-    #從Line的event物件抓資料
-    userID = event.source.user_id
-    message_type = event.message.type
-    msg_from_user = event.message.text
-    
-    msg_to_user = ""
-    message = ""
-    items = ["化妝保養品","生鮮食材","冷凍料理","零食甜點","料理用品","保健食品","醫療藥用品"]
-    match = False
-    for item in items:
-      if(msg_from_user == item):
-        match = True
-        break
-
-    if(getUserStatus(event.source.user_id) == "wait_for_select_category"):
-        if(match == True):
-            docs = getUserInfo(event.source.user_id)
-            last_image = docs['image just uploaded']
-            doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
-            doc_ref.set({"category": msg_from_user, "file": last_image})
-
-            msg_to_user = "已將此物品歸類至「" + msg_from_user + "」，請告訴我有效日期。"
-            message = TextSendMessage(text=msg_to_user, quick_reply=QuickReply(items=[
-                                QuickReplyButton(action=DatetimePickerAction(label="選擇日期", mode="date", data="expire_date"))
-                            ]))
-            line_bot_api.reply_message(event.reply_token, message)
-            setUserStatus(event.source.user_id, "wait_for_expire_date")
-    
-    elif(msg_from_user == "記錄品項"):
-        sendDefaultMessage(event.reply_token)
-
-    elif(msg_from_user == "提醒我"):
-        content = {
+def generateJson(imgList):
+    jsonContent = {
           "type": "carousel",
-          "contents": [
-            {
+          "contents": []
+        }
+    for item in imgList:
+      blob = bucket.blob(item['file'])
+      category = item['category']
+      expire_date = item['expire_date']
+
+      url = blob.generate_signed_url(datetime.timedelta(seconds=300), method='GET')
+      
+      aCard = {
               "type": "bubble",
               "size": "micro",
               "hero": {
@@ -239,93 +200,75 @@ def handle_message(event):
                   "backgroundColor": "#D3FFEC"
                 }
               }
-            },
-            {
-              "type": "bubble",
-              "size": "micro",
-              "hero": {
-                "type": "image",
-                "size": "full",
-                "aspectRatio": "20:13",
-                "aspectMode": "cover",
-                "url": "https://i.imgur.com/oMXyQNP.jpg"
-              },
-              "body": {
-                "type": "box",
-                "layout": "vertical",
-                "spacing": "sm",
-                "contents": [
-                  {
-                    "type": "text",
-                    "text": "生鮮食材",
-                    "wrap": True,
-                    "weight": "bold",
-                    "size": "md"
-                  },
-                  {
-                    "type": "box",
-                    "layout": "baseline",
-                    "flex": 1,
-                    "contents": [
-                      {
-                        "type": "text",
-                        "text": "2020-09-26",
-                        "wrap": True,
-                        "weight": "bold",
-                        "size": "md",
-                        "flex": 0
-                      }
-                    ]
-                  },
-                  {
-                    "type": "text",
-                    "text": "即將到期！",
-                    "wrap": True,
-                    "size": "sm",
-                    "margin": "md",
-                    "color": "#ff5551",
-                    "flex": 0,
-                    "weight": "bold"
-                  }
-                ]
-              },
-              "footer": {
-                "type": "box",
-                "layout": "vertical",
-                "spacing": "sm",
-                "contents": [
-                  {
-                    "type": "button",
-                    "style": "primary",
-                    "action": {
-                      "type": "message",
-                      "label": "已使用完畢",
-                      "text": "done"
-                    },
-                    "height": "sm"
-                  },
-                  {
-                    "type": "button",
-                    "action": {
-                      "type": "message",
-                      "label": "一週後提醒我",
-                      "text": "一週後"
-                    },
-                    "height": "sm"
-                  }
-                ]
-              },
-              "styles": {
-                "body": {
-                  "backgroundColor": "#D3FFEC"
-                },
-                "footer": {
-                  "backgroundColor": "#D3FFEC"
-                }
-              }
             }
-          ]
-        }
+      aCard['hero']['url'] = url
+      aCard['body']['contents'][0]['text'] = category
+      aCard['body']['contents'][1]['contents'][0]['text'] = expire_date
+      
+      jsonContent['contents'].append(aCard)
+
+    return jsonContent
+      
+
+      
+
+# 問候訊息
+@handler.add(FollowEvent)
+def handle_follow(event):
+    initUserInfo(event.source.user_id)
+    text = "哈囉～！歡迎使用滴答提醒。\n\n我可以幫助您記錄容易過期或忘記使用的產品並適時提醒您。\n\n您可以使用選單中的「紀錄品項」可以上傳照片，接著只要輸入日期就能成功紀錄。\n如果您需要查看紀錄的產品與過期日，請點選「查看品項」。"
+    sendDefaultMessage(event.reply_token, text)
+
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    if (getUserStatus(event.source.user_id) == "wait_for_expire_date"):
+        docs = getUserInfo(event.source.user_id)
+        last_image = docs['image just uploaded']
+        doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
+        docs = doc_ref.get().to_dict()
+        docs['expire_date'] = event.postback.params['date']
+        doc_ref.set(docs)
+        setUserStatus(event.source.user_id, "Standby")
+        sendDefaultMessage(event.reply_token, "有效日期為「"+event.postback.params['date']+"」，我會在到期前提醒你ㄉ")
+
+# 處理訊息
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+   
+    #從Line的event物件抓資料
+    userID = event.source.user_id
+    message_type = event.message.type
+    msg_from_user = event.message.text
+    
+    msg_to_user = ""
+    message = ""
+    items = ["化妝保養品","生鮮食材","冷凍料理","零食甜點","料理用品","保健食品","醫療藥用品"]
+    match = False
+    for item in items:
+      if(msg_from_user == item):
+        match = True
+        break
+
+    if(getUserStatus(event.source.user_id) == "wait_for_select_category"):
+        if(match == True):
+            docs = getUserInfo(event.source.user_id)
+            last_image = docs['image just uploaded']
+            doc_ref = db.collection('users').document(event.source.user_id).collection('stocks').document(last_image)
+            doc_ref.set({"category": msg_from_user, "file": last_image})
+
+            msg_to_user = "已將此物品歸類至「" + msg_from_user + "」，請告訴我有效日期。"
+            message = TextSendMessage(text=msg_to_user, quick_reply=QuickReply(items=[
+                                QuickReplyButton(action=DatetimePickerAction(label="選擇日期", mode="date", data="expire_date"))
+                            ]))
+            line_bot_api.reply_message(event.reply_token, message)
+            setUserStatus(event.source.user_id, "wait_for_expire_date")
+    
+    elif(msg_from_user == "記錄品項"):
+        sendDefaultMessage(event.reply_token)
+
+    elif(msg_from_user == "提醒我"):
+        imglist = getUserImageList(userID)
+        content = generateJson(imgList)
 
         message = FlexSendMessage(
             alt_text = "flex message",
@@ -392,7 +335,7 @@ def handle_img_message(event):
         "paddingAll": "0px"
       }
     },
-        {
+    {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -416,7 +359,7 @@ def handle_img_message(event):
         "paddingAll": "0px"
       }
     },
-        {
+    {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -440,7 +383,7 @@ def handle_img_message(event):
         "paddingAll": "0px"
       }
     },
-        {
+    {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -464,7 +407,7 @@ def handle_img_message(event):
         "paddingAll": "0px"
       }
     },
-        {
+    {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -488,7 +431,7 @@ def handle_img_message(event):
         "paddingAll": "0px"
       }
     },
-        {
+    {
       "type": "bubble",
       "size": "micro",
       "body": {
@@ -512,7 +455,7 @@ def handle_img_message(event):
         "paddingAll": "0px"
       }
     },
-        {
+    {
       "type": "bubble",
       "size": "micro",
       "body": {
