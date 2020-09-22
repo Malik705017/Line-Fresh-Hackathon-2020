@@ -117,7 +117,7 @@ def generateJson(imgList):
       blob = bucket.blob(item['file'])
       category = item['category']
       expire_date = item['expire_date']
-
+      url = "default"
       url = blob.generate_signed_url(datetime.timedelta(seconds=300), method='GET')
       
       aCard = {
@@ -205,7 +205,7 @@ def generateJson(imgList):
             }
       
       aCard['hero']['url'] = url
-      aCard['body']['contents'][0]['text'] = category
+      aCard['body']['contents'][0]['text'] = category + url
       aCard['body']['contents'][1]['contents'][0]['text'] = expire_date
       
       jsonContent['contents'].append(aCard)
