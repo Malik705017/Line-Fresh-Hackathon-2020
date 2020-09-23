@@ -64,6 +64,7 @@ def callback():
     return 'OK'
 
 
+
 def sendDefaultMessage(reply_token, text=""):
     msg_to_user = text 
     if msg_to_user:
@@ -100,10 +101,10 @@ def getUserStatus(user_id):
     return docs['status']
 
 def getUserImgList(user_id):
-    #Get multiple documents from a collection group
+    # Get multiple documents from a collection group 
     docs = db.collection('users').document(user_id).collection('stocks').stream() 
     imgList = []
-    #Get 欄位資料 from each document
+    # Get 欄位資料 from each document
     for doc in docs:
         doc = doc.to_dict()
         category = doc['category']
@@ -113,8 +114,11 @@ def getUserImgList(user_id):
              "expire_date" : expire_date,
              "file" : img
               })
+    # Sort by expire date
+    imgList.sort(key = lambda s: s[1]) 
     return imgList
 
+# 尚未依照時間順序排序content
 def generateJson(user_id , imgList):
     
     jsonContent = {
@@ -129,7 +133,7 @@ def generateJson(user_id , imgList):
       # generate url for img
       url = blob.generate_signed_url(datetime.timedelta(seconds=300), method='GET')
       
-      aCard = {
+      aContent = {
               "type": "bubble",
               "size": "micro",
               "hero": {
@@ -213,11 +217,11 @@ def generateJson(user_id , imgList):
               }
             }
       
-      aCard['hero']['url'] = url
-      aCard['body']['contents'][0]['text'] = category
-      aCard['body']['contents'][1]['contents'][0]['text'] = expire_date
+      aContent['hero']['url'] = url
+      aContent['body']['contents'][0]['text'] = category
+      aContent['body']['contents'][1]['contents'][0]['text'] = expire_date
       
-      jsonContent['contents'].append(aCard)
+      jsonContent['contents'].append(aContent)
 
       print(url)
 
@@ -245,7 +249,7 @@ def handle_postback(event):
         setUserStatus(event.source.user_id, "Standby")
         sendDefaultMessage(event.reply_token, "有效日期為「"+event.postback.params['date']+"」，我會在到期前提醒你ㄉ")
 
-# 處理訊息
+# 處理文字訊息 TextMessage
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
    
@@ -290,10 +294,10 @@ def handle_message(event):
             ) 
     
         line_bot_api.reply_message(event.reply_token, message)
+        # 缺少使用完畢的刪除動作
 
-    
-    
-# 處理圖片訊息（接收到圖片訊息時啟動）
+       
+# 處理圖片訊息 ImageMessage
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_img_message(event):
     if getUserStatus(event.source.user_id) == "Standby":
@@ -321,7 +325,7 @@ def handle_img_message(event):
         setUserStatus(event.source.user_id, "wait_for_select_category")
 
 
-    #contents = (寫好的json檔案)
+    # contents = (寫好的json檔案)
     contents =  {
   "type": "carousel",
   "contents": [
@@ -495,8 +499,6 @@ def handle_img_message(event):
     }
   ]
 }
-
-
     message = FlexSendMessage(
             alt_text = "flex message",
             contents = contents
