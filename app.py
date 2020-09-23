@@ -99,24 +99,24 @@ def getUserStatus(user_id):
     docs = getUserInfo(user_id)
     return docs['status']
 
-def getUserImageList(user_id):
-    docs = db.collection('users').document(user_id).collection('stocks').stream()
-    imageList = []
+def getUserImgList(user_id):
+    #Get multiple documents from a collection group
+    docs = db.collection('users').document(user_id).collection('stocks').stream() 
+    imgList = []
+    #Get 欄位資料 from each document
     for doc in docs:
         doc = doc.to_dict()
         category = doc['category']
         expire_date = doc['expire_date']
         img = doc['file']
-        imageList.append({ "category" : category,
+        imgList.append({ "category" : category,
              "expire_date" : expire_date,
              "file" : img
               })
-        
-
-    return imageList
+    return imgList
 
 def generateJson(user_id , imgList):
-
+    
     jsonContent = {
           "type": "carousel",
           "contents": []
@@ -126,7 +126,7 @@ def generateJson(user_id , imgList):
       blob = bucket.blob(user_id + "/" + item['file'])
       category = item['category']
       expire_date = item['expire_date']
-      url = "default"
+      # generate url for img
       url = blob.generate_signed_url(datetime.timedelta(seconds=300), method='GET')
       
       aCard = {
@@ -281,8 +281,8 @@ def handle_message(event):
         sendDefaultMessage(event.reply_token)
 
     elif(msg_from_user == "提醒我"):
-        imglist = getUserImageList(userID)
-        content = generateJson(userID , imglist)
+        imgList = getUserImgList(userID)
+        content = generateJson(userID , imgList)
 
         message = FlexSendMessage(
             alt_text = "flex message",
