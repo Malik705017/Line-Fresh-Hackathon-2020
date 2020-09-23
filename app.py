@@ -100,11 +100,20 @@ def getUserStatus(user_id):
     return docs['status']
 
 def getUserImageList(user_id):
+    docs = db.collection('users').document(user_id).collection('stocks').stream()
+    imageList = []
+    for doc in docs:
+        doc = doc.get().to_dict()
+        category = doc['category']
+        expire_date = doc['expire_date']
+        img = doc['file']
+        imageList.append({ "category" : category,
+             "expire_date" : expire_date,
+             "file" : img
+              })
+        
 
-    return [{ "category" : "保健食品",
-             "expire_date" : "2022-03-12",
-             "file" : "1600489971207.jpg"
-              }] #回傳圖片名稱
+    return imageList
 
 def generateJson(user_id , imgList):
 
