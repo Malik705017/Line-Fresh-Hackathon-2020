@@ -103,7 +103,7 @@ def getUserImageList(user_id):
     docs = db.collection('users').document(user_id).collection('stocks').stream()
     imageList = []
     for doc in docs:
-        doc = doc.get().to_dict()
+        doc = doc.to_dict()
         category = doc['category']
         expire_date = doc['expire_date']
         img = doc['file']
