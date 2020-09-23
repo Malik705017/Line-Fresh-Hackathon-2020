@@ -114,7 +114,7 @@ def getUserImgList(user_id):
              "expire_date" : expire_date,
              "file" : img
               })
-    # Sort by expire date
+    # Sort by expire date!
     imgList.sort(key = lambda s: s['expire_date']) 
     return imgList
 
